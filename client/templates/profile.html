@@ -13,7 +13,7 @@
             <div class="header status{{user.status}}-bg">
                 <img class="avatar" ng-src="{{user.pictureurl || 'img/avatar.jpg'}}" ng-click="popupDialog()"/>
                 <h2>{{user.lastname}} {{user.firstname}}</h2>
-                <h3>Member since {{user.createddate | date:'longDate'}}</h3>
+                <h3>Member since {{user.createddate | date:'yyyy年M月d日（EEE）'}}</h3>
             </div>
 
             <div style="padding: 8px 16px;" class="status{{user.status}}">

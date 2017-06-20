@@ -8,7 +8,7 @@
         <div ng-repeat="offer in walletItems" class="list card">
             <div class="item">
                 <h2>{{offer.name}}</h2>
-                <p>期限　 {{offer.enddate}}</p>
+                <p>期限　 {{offer.enddate | date:'yyyy年M月d日（EEE）'}}</p>
             </div>
             <div class="item item-body">
                 <img class="full-image" ng-src="img/qrcode.svg">
