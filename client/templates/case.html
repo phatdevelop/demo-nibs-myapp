@@ -9,9 +9,36 @@
 
             <p>How can we help you?</p>
 
+            <input type=hidden name='captcha_settings' value='{"keyname":"demo_nibs_myapp_herokuapp_com","fallback":"true","orgId":"00D7F000000xYLs","ts":""}'>
+            <input type=hidden name="orgid" value="00D7F000000xYLs">
+            <input type=hidden name="retURL" value="http://">
+            <!--  ----------------------------------------------------------------------  -->
+            <!--  注意: これらの項目は、省略可能なデバッグ用要素です。デバッグモードでテストを行う場合は、これらの行をコメント解除してください。        -->
+            <!--  <input type="hidden" name="debug" value=1>                              -->
+            <!--  <input type="hidden" name="debugEmail" value="ytakemoto@keizu.co.jp">   -->
+            <!--  ----------------------------------------------------------------------  -->
             <div class="item item-body">
-                <textarea placeholder="Description" ng-model="case.description" rows="10"></textarea>
+                <label for="name">取引先責任者名</label><input id="name" maxlength="80" name="name" size="20" type="text" /><br>
             </div>
+            <div class="item item-body">
+                <label for="email">メール</label><input id="email" maxlength="80" name="email" size="20" type="text" /><br>
+            </div>
+            <div class="item item-body">
+                <label for="phone">電話</label><input id="phone" maxlength="40" name="phone" size="20" type="text" /><br>
+            </div>
+            <div class="item item-body">
+                <label for="subject">件名</label><input id="subject" maxlength="80" name="subject" size="20" type="text" /><br>
+            </div>
+            <div class="item item-body">
+                <!-- <textarea placeholder="Description" ng-model="case.description" rows="10"></textarea> -->
+                <label for="description">説明</label><textarea placeholder="Description" name="description" rows="10"></textarea><br>
+            </div>
+
+            <script src="https://www.google.com/recaptcha/api.js"></script>
+            <script>
+             function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+            </script>
+            <div class="g-recaptcha" data-sitekey="6LfyHiYUAAAAAKqtFjvjYzxKTgIbKnjCiLk6c-f_"></div><br>
 
             <button class="button button-block button-light" ng-click="submit()">
                 Submit
