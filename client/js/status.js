@@ -14,7 +14,7 @@ angular.module('nibs.status', [])
             if (data.originalStatus !== data.newStatus) {
                 $rootScope.user.status = data.newStatus;
                 $ionicPopup.show({
-                    title: 'おめでとうございます！, ' + $rootScope.user.lastname + '　' + $rootScope.user.firstname + 'さん！',
+                    title: 'おめでとうございます！<br>' + $rootScope.user.lastname + '　' + $rootScope.user.firstname + 'さん！',
                     template:
                         '<div style="text-align: center" class="status' + data.newStatus + '">' +
                         '<p>あなたは新しいステータスにランクアップしました！</p>' +
