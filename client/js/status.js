@@ -14,10 +14,10 @@ angular.module('nibs.status', [])
             if (data.originalStatus !== data.newStatus) {
                 $rootScope.user.status = data.newStatus;
                 $ionicPopup.show({
-                    title: 'Congratulations, ' + $rootScope.user.firstname + '!',
+                    title: 'おめでとうございます！, ' + $rootScope.user.lastname + '　' + $rootScope.user.firstname + 'さん！',
                     template:
                         '<div style="text-align: center" class="status' + data.newStatus + '">' +
-                        '<p>You have achieved a new status!</p>' +
+                        '<p>あなたは新しいステータスにランクアップしました！</p>' +
                         '<img src="css/img/icon-status' + data.newStatus + '.svg" height="120"/>' +
                         '<h3 class="status' + data.newStatus + '">' + STATUS_LABELS[data.newStatus - 1] + ' Member</h3>' +
                         '<h4 class="status' + data.newStatus + '">' + data.newBalance + ' Nibs</h4>',
