@@ -1,4 +1,4 @@
-<ion-view title="Settings" hide-back-button="true" class="settings card-bg">
+<ion-view title="設定" hide-back-button="true" class="settings card-bg">
 
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -8,6 +8,7 @@
 
         <div class="list">
 
+<!--
             <div class="item item-body">
                 <p>{{server.url}}</p>
                 <p>Regular logout for regular and Facebook users.</p>
@@ -21,15 +22,18 @@
                     Logout and Revoke Permissions
                 </button>
             </div>
+-->
+
             <div class="item item-body">
-                <p>For demo purpose: resets user to lowest status.</p>
+                <p>お気に入りの特典、希望商品リスト、最近の活動を全削除します。</p>
                 <button class="button button-block button-light" ng-click="deleteActivities()">
-                    Delete Activities
+                    削除
                 </button>
             </div>
             <div class="item item-body">
+                <p>ギャラリーの写真を全削除します。</p>
                 <button class="button button-block button-light" ng-click="deletePictures()">
-                    Delete Gallery Pictures
+                    削除
                 </button>
             </div>
 
