@@ -18,7 +18,7 @@ angular.module('nibs.case', [])
     })
 
     // Services
-    .factory('Case', function ($http, $rootScope) {
+    .factory('Case', function ($http, $rootScope, $ionicPopup) {
         return {
             create: function(theCase) {
                 //return $http.post($rootScope.server.url + '/cases/', theCase);
