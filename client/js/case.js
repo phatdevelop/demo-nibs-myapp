@@ -22,7 +22,22 @@ angular.module('nibs.case', [])
         return {
             create: function(theCase) {
                 //return $http.post($rootScope.server.url + '/cases/', theCase);
-                return $http.post('https://www.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8', theCase);
+                var conf = {
+                    headers: {
+                        "Content-type": "text/html"
+                    },
+                    transformRequest: null
+                };
+                var fd = new FormData();
+                fd.append('captcha_settings', theCase.captcha_settings);
+                fd.append('orgid', theCase.orgid);
+                fd.append('retURL', theCase.retURL);
+                fd.append('name', theCase.name);
+                fd.append('email', theCase.email);
+                fd.append('phone', theCase.phone);
+                fd.append('subject', theCase.subject);
+                fd.append('description', theCase.description);
+                return $http.post('https://www.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8', fd, conf);
             }
         };
     })
@@ -33,8 +48,7 @@ angular.module('nibs.case', [])
         $scope.case = {};
 
         $scope.submit = function () {
-            //Case.create($scope.case).success(function() {
-            Case.create($scope).success(function() {
+            Case.create($scope.case).success(function() {
                 $ionicPopup.alert({title: 'Thank You', content: 'A customer representative will contact you shortly.'});
             });
         };
