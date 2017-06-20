@@ -9,6 +9,7 @@
 
             <p>How can we help you?</p>
 
+<form action="https://www.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
             <input ng-model="case.captcha_settings" type=hidden name='captcha_settings' value='{"keyname":"demo_nibs_myapp_herokuapp_com","fallback":"true","orgId":"00D7F000000xYLs","ts":""}'>
             <input ng-model="case.orgid" type=hidden name="orgid" value="00D7F000000xYLs">
             <input ng-model="case.retURL" type=hidden name="retURL" value="http://">
@@ -18,20 +19,20 @@
             <!--  <input type="hidden" name="debugEmail" value="ytakemoto@keizu.co.jp">   -->
             <!--  ----------------------------------------------------------------------  -->
             <div class="item item-body">
-                <label for="name">Name</label><input ng-model="case.name" id="name" placeholder="Name" maxlength="80" name="name" size="20" type="text" value="{{user.firstname}} {{user.lastname}}" /><br>
+                <label for="name">Name</label><input id="name" placeholder="Name" maxlength="80" name="name" size="20" type="text" value="{{user.firstname}} {{user.lastname}}" /><br>
             </div>
             <div class="item item-body">
-                <label for="email">Email</label><input ng-model="case.email" id="email" placeholder="Email" maxlength="80" name="email" size="20" type="text" /><br>
+                <label for="email">Email</label><input id="email" placeholder="Email" maxlength="80" name="email" size="20" type="text" /><br>
             </div>
             <div class="item item-body">
-                <label for="phone">Phone</label><input ng-model="case.phone" id="phone" placeholder="Phone" maxlength="40" name="phone" size="20" type="text" /><br>
+                <label for="phone">Phone</label><input id="phone" placeholder="Phone" maxlength="40" name="phone" size="20" type="text" /><br>
             </div>
             <div class="item item-body">
-                <label for="subject">Subject</label><input ng-model="case.subject" id="subject" placeholder="Subject"maxlength="80" name="subject" size="20" type="text" /><br>
+                <label for="subject">Subject</label><input id="subject" placeholder="Subject"maxlength="80" name="subject" size="20" type="text" /><br>
             </div>
             <div class="item item-body">
                 <!-- <textarea placeholder="Description" ng-model="case.description" rows="10"></textarea> -->
-                <label for="description">Description</label><textarea ng-model="case.description" placeholder="Description" name="description" rows="10"></textarea><br>
+                <label for="description">Description</label><textarea placeholder="Description" name="description" rows="10"></textarea><br>
             </div>
 <!--
             <div class="item item-body">
@@ -45,7 +46,8 @@
             <button class="button button-block button-light" ng-click="submit()">
                 Submit
             </button>
-
+<input class="button button-block button-light" type="submit" name="submit" />
+</form>
             <p><strong>{{status}}</strong></p>
 
         </div>
