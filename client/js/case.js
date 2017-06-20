@@ -27,13 +27,15 @@ angular.module('nibs.case', [])
     })
 
     //Controllers
-    .controller('CaseCtrl', function ($scope, $window, $ionicPopup, Case, User) {
+    //.controller('CaseCtrl', function ($scope, $window, $ionicPopup, Case, User) {
+    .controller('CaseCtrl', function ($scope, $window, $ionicPopup, $state, Case, User) {
 
         $scope.case = {};
 
         $scope.submit = function () {
             Case.create($scope.case).success(function() {
                 $ionicPopup.alert({title: 'Thank You', content: 'A customer representative will contact you shortly.'});
+                $state.go('app.profile');
             });
         };
 
