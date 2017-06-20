@@ -21,25 +21,7 @@ angular.module('nibs.case', [])
     .factory('Case', function ($http, $rootScope) {
         return {
             create: function(theCase) {
-                //return $http.post($rootScope.server.url + '/cases/', theCase);
-                var conf = {
-                    headers: {
-                        "Content-type": "application/x-www-form-urlencoded"
-                    },
-                    transformRequest: null
-                };
-                var fd = new FormData();
-                fd.append('captcha_settings', theCase.captcha_settings);
-                fd.append('orgid', theCase.orgid);
-                fd.append('retURL', theCase.retURL);
-                fd.append('name', theCase.name);
-                fd.append('email', theCase.email);
-                fd.append('phone', theCase.phone);
-                fd.append('subject', theCase.subject);
-                fd.append('description', theCase.description);
-                $ionicPopup.alert({title: 'fd', content: fd.orgid + ' / ' + fd.subject});
-                $ionicPopup.alert({title: 'theCase', content: theCase.orgid + ' / ' + theCase.subject});
-                return $http.post('https://www.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8', fd, conf);
+                return $http.post($rootScope.server.url + '/cases/', theCase);
             }
         };
     })

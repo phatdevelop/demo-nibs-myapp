@@ -9,45 +9,24 @@
 
             <p>How can we help you?</p>
 
-<form action="https://www.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8" method="POST">
-            <input type=hidden name='captcha_settings' value='{"keyname":"demo_nibs_myapp_herokuapp_com","fallback":"true","orgId":"00D7F000000xYLs","ts":""}'>
-            <input type=hidden name="orgid" value="00D7F000000xYLs">
-            <input type=hidden name="retURL" value="http://">
-            <!--  ----------------------------------------------------------------------  -->
-            <!--  注意: これらの項目は、省略可能なデバッグ用要素です。デバッグモードでテストを行う場合は、これらの行をコメント解除してください。        -->
-            <!--  <input type="hidden" name="debug" value=1>                              -->
-            <!--  <input type="hidden" name="debugEmail" value="ytakemoto@keizu.co.jp">   -->
-            <!--  ----------------------------------------------------------------------  -->
             <div class="item item-body">
-                <label for="name">Name</label><input id="name" placeholder="Name" maxlength="80" name="name" size="20" type="text" value="{{user.firstname}} {{user.lastname}}" /><br>
+                <input placeholder="Name" ng-model="case.name" maxlength="80" name="name" size="20" type="text" value="{{user.firstname}} {{user.lastname}}" /><br>
             </div>
             <div class="item item-body">
-                <label for="email">Email</label><input id="email" placeholder="Email" maxlength="80" name="email" size="20" type="text" /><br>
+                <input placeholder="Email" ng-model="case.email" maxlength="80" name="email" size="20" type="text" /><br>
             </div>
             <div class="item item-body">
-                <label for="phone">Phone</label><input id="phone" placeholder="Phone" maxlength="40" name="phone" size="20" type="text" /><br>
+                <input placeholder="Phone" ng-model="case.phone" maxlength="40" name="phone" size="20" type="text" /><br>
             </div>
             <div class="item item-body">
-                <label for="subject">Subject</label><input id="subject" placeholder="Subject"maxlength="80" name="subject" size="20" type="text" /><br>
+                <input placeholder="Subject" ng-model="case.subject" maxlength="80" size="20" type="text" /><br>
             </div>
             <div class="item item-body">
-                <!-- <textarea placeholder="Description" ng-model="case.description" rows="10"></textarea> -->
-                <label for="description">Description</label><textarea placeholder="Description" name="description" rows="10"></textarea><br>
+                <textarea placeholder="Description" ng-model="case.description" rows="10"></textarea>
             </div>
-<!--
-            <div class="item item-body">
-            <script src="https://www.google.com/recaptcha/api.js"></script>
-            <script>
-             function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
-            </script>
-            <div class="g-recaptcha" data-sitekey="6LfyHiYUAAAAAKqtFjvjYzxKTgIbKnjCiLk6c-f_"></div><br>
-            </div>
--->
             <button class="button button-block button-light" ng-click="submit()">
                 Submit
             </button>
-<input class="button button-block button-light" type="submit" name="submit" />
-</form>
             <p><strong>{{status}}</strong></p>
 
         </div>
