@@ -5,11 +5,11 @@
       <div class="list card">
           <div class="item">
               <h2>{{offer.name}}</h2>
-              <p>期限　 {{offer.enddate | date:'EEEE, MMMM d y'}}</p>
+              <p>期限　 {{offer.enddate | date:'yyyy年M月d日（EEE）'}}</p>
           </div>
           <div class="item item-body">
               <img class="full-image" src="img/qrcode.svg">
-              <p>この特典を利用するにはお店にこの二次元バーコードを提示して下さい。お店を探すには以下のボタンをクリックして下さい。</p>
+              <p>この特典を利用するにはお店にこの二次元バーコードを提示して下さい。<br>お店を探すには以下のボタンをクリックして下さい。</p>
               <button class="button button-block button-light" ui-sref="app.store-locator">
                   近くのお店を探す
               </button>
