@@ -34,11 +34,13 @@
                 <label for="description">Description</label><textarea placeholder="Description" name="description" rows="10"></textarea><br>
             </div>
 
+            <div class="item item-body">
             <script src="https://www.google.com/recaptcha/api.js"></script>
             <script>
              function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
             </script>
             <div class="g-recaptcha" data-sitekey="6LfyHiYUAAAAAKqtFjvjYzxKTgIbKnjCiLk6c-f_"></div><br>
+            </div>
 
             <button class="button button-block button-light" ng-click="submit()">
                 Submit
