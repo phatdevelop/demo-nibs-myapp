@@ -27,19 +27,19 @@
                     <input type="text" ng-model="user.email" ng-readonly="true"/>
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">First Name</span>
-                    <input type="text" ng-model="user.firstname" />
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Last Name</span>
+                    <span class="input-label">姓</span>
                     <input type="text" ng-model="user.lastname" />
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Mobile Phone</span>
+                    <span class="input-label">名</span>
+                    <input type="text" ng-model="user.firstname" />
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">携帯電話番号</span>
                     <input type="text" ng-model="user.mobilephone" />
                 </label>
                 <li class="item item-toggle">
-                    See Premium Offers
+                    プレミアム特典を見る
                     <label class="toggle">
                         <input type="checkbox">
                         <div class="track">
@@ -53,7 +53,7 @@
         <div ng-if="panel===2">
             <form class="list list-inset">
                 <div class="item item-divider">
-                    Chocolate
+                    チョコレート
                 </div>
                 <ion-radio name = "pref" ng-repeat="preference in preferences"
                            ng-value="preference.value"
@@ -61,7 +61,7 @@
                     {{ preference.text }}
                 </ion-radio>
                 <div class="item item-divider">
-                    T-Shirt Size
+                    Ｔシャツのサイズ
                 </div>
                 <ion-radio name="size" ng-repeat="size in sizes"
                            ng-value="size.value"
