@@ -22,10 +22,10 @@ angular.module('nibs.case', [])
         return {
             create: function(theCase) {
                 //return $http.post($rootScope.server.url + '/cases/', theCase);
-                $ionicPopup.alert({title: 'theCase', content: theCase});
+                $ionicPopup.alert({title: 'theCase', content: theCase.orgid + ' / ' + theCase.subject});
                 var conf = {
                     headers: {
-                        "Content-type": "text/html"
+                        "Content-type": "application/x-www-form-urlencoded"
                     },
                     transformRequest: null
                 };
@@ -38,7 +38,7 @@ angular.module('nibs.case', [])
                 fd.append('phone', theCase.phone);
                 fd.append('subject', theCase.subject);
                 fd.append('description', theCase.description);
-                $ionicPopup.alert({title: 'fd', content: fd});
+                $ionicPopup.alert({title: 'fd', content: fd.orgid + ' / ' + fd.subject});
                 return $http.post('https://www.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8', fd, conf);
             }
         };
