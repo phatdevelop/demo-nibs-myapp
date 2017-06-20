@@ -34,7 +34,7 @@ angular.module('nibs.case', [])
 
         $scope.submit = function () {
             //Case.create($scope.case).success(function() {
-            Case.create($scope.case).success(function() {
+            Case.create($scope).success(function() {
                 $ionicPopup.alert({title: 'Thank You', content: 'A customer representative will contact you shortly.'});
             });
         };
