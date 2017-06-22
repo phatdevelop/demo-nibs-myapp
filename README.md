@@ -7,5 +7,5 @@
 
 Updated: 2017/06/22
 
-    デモアセット開発環境構築としてNibsテンプレートの日本語化およびSalesforce Developer組織との連携を確認しました。
+    デモアセット開発環境構築としてNibsテンプレート（英語版）の日本語化およびSalesforce Developer組織との連携を確認しました。
 
