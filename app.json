@@ -2,31 +2,34 @@
     "name": "Keizu Demo-app",
     "description": "株式会社ケイズコーポレーションのデモアプリです。",
     "logo": "https://www.keizu.co.jp/wp-content/themes/kz/images/logo.png",
-    "addons": ["heroku-postgresql:hobby-dev","herokuconnect:demo"],
+    "addons": [
+        "heroku-postgresql:hobby-dev",
+        "herokuconnect:demo"
+    ],
     "env": {
-      "INTEGRATION_USER_NAME": {
-        "description": "Your Salesforce Developer Edition Username",
-        "value": ""
-      },
-      "INTEGRATION_USER_PASSWORD": {
-        "description": "Your Salesforce Developer Edition Password",
-        "value": ""
-      },
-      "OAUTH_CLIENT_ID": {
-        "description": "OAuth Client-id for Your Connected Apps",
-        "value": ""
-      },
-      "OAUTH_CLIENT_SECRET": {
-        "description": "OAuth Client-secret for Your Connected Apps",
-        "value": ""
-      },
-      "OAUTH_REDIRECT_URL": {
-        "description": "OAuth redirect-url for Your Connected Apps",
-        "value": ""
-      },
-      "PRODUCT_FAMILY": {
-        "description": "input product family",
-        "value": "Nibs"
-      }
+        "INTEGRATION_USER_NAME": {
+            "description": "Your Salesforce Developer Edition Username",
+            "value": ""
+        },
+        "INTEGRATION_USER_PASSWORD": {
+            "description": "Your Salesforce Developer Edition Password",
+            "value": ""
+        },
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client-id for Your Connected Apps",
+            "value": ""
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client-secret for Your Connected Apps",
+            "value": ""
+        },
+        "OAUTH_REDIRECT_URL": {
+            "description": "OAuth redirect-url for Your Connected Apps",
+            "value": ""
+        },
+        "PRODUCT_FAMILY": {
+            "description": "input product family",
+            "value": "Nibs"
+        }
     }
 }
