@@ -5,7 +5,7 @@
     "env": {
       "INTEGRATION_USER_NAME": {
         "description": "Your Salesforce Developer Edition Username",
-        "value": "require"
+        "value": ""
       },
       "INTEGRATION_USER_PASSWORD": {
         "description": "Your Salesforce Developer Edition Password",
