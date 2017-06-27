@@ -1,6 +1,7 @@
 {
     "name": "Keizu Demo-app",
-    "description": "株式会社ケイズコーポレーションのデモアプリです。",
+    "description": "譬ｪ蠑丈ｼ夂､ｾ繧ｱ繧､繧ｺ繧ｳ繝ｼ繝昴Ξ繝ｼ繧ｷ繝ｧ繝ｳ縺ｮ繝�繝｢繧｢繝励Μ縺ｧ縺吶�",
+    "logo": "https://www.keizu.co.jp/wp-content/themes/kz/images/logo.png",
     "addons": [
         "heroku-postgresql:hobby-dev",
         "herokuconnect:demo"
