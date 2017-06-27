@@ -4,23 +4,23 @@
     "addons": ["heroku-postgresql:hobby-dev","herokuconnect:demo"],
     "env": {
       "INTEGRATION_USER_NAME": {
-        "description": "Salesforce Developer Edition Username",
-        "value": ""
+        "description": "Your Salesforce Developer Edition Username",
+        "value": "require"
       },
       "INTEGRATION_USER_PASSWORD": {
-        "description": "Salesforce Developer Edition Password",
+        "description": "Your Salesforce Developer Edition Password",
         "value": ""
       },
       "OAUTH_CLIENT_ID": {
-        "description": "OAuth Client-id",
+        "description": "OAuth Client-id for Your Connected Apps",
         "value": ""
       },
       "OAUTH_CLIENT_SECRET": {
-        "description": "OAuth Client-secret",
+        "description": "OAuth Client-secret for Your Connected Apps",
         "value": ""
       },
       "OAUTH_REDIRECT_URL": {
-        "description": "OAuth redirect-url",
+        "description": "OAuth redirect-url for Your Connected Apps",
         "value": ""
       },
       "PRODUCT_FAMILY": {
