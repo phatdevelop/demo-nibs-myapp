@@ -1,5 +1,6 @@
 {
     "name": "Keizu Demo-app",
+    "description": "株式会社ケイズコーポレーションのデモアプリです。",
     "addons": [
         "heroku-postgresql:hobby-dev",
         "herokuconnect:demo"
