@@ -3,8 +3,7 @@
     "description": "株式会社ケイズコーポレーションのデモアプリです。",
     "logo": "https://www.keizu.co.jp/wp-content/themes/kz/images/logo.png",
     "addons": [
-        "heroku-postgresql:hobby-dev",
-        "herokuconnect:demo"
+        "heroku-postgresql:hobby-dev"
     ],
     "env": {
         "INTEGRATION_USER_NAME": {
