@@ -1,5 +1,31 @@
 {
     "name": "Nibs",
     "description": "Customer loyalty application",
-    "addons": ["heroku-postgresql:hobby-dev"]
+    "addons": ["heroku-postgresql:hobby-dev","herokuconnect"]
+    "env": {
+      "INTEGRATION_USER_NAME": {
+        "description": "Salesforce Developer Edition Username",
+        "value": ""
+      },
+      "INTEGRATION_USER_PASSWORD": {
+        "description": "Salesforce Developer Edition Password",
+        "value": ""
+      },
+      "OAUTH_CLIENT_ID": {
+        "description": "OAuth Client-id",
+        "value": ""
+      },
+      "OAUTH_CLIENT_SECRET": {
+        "description": "OAuth Client-secret",
+        "value": ""
+      },
+      "OAUTH_REDIRECT_URL": {
+        "description": "OAuth redirect-url",
+        "value": ""
+      },
+      "PRODUCT_FAMILY": {
+        "description": "input product family",
+        "value": "Nibs"
+      }
+    }
 }
