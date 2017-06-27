@@ -1,7 +1,7 @@
 {
     "name": "Nibs",
     "description": "Customer loyalty application",
-    "addons": ["heroku-postgresql:hobby-dev","herokuconnect"]
+    "addons": ["heroku-postgresql:hobby-dev","herokuconnect:demo"],
     "env": {
       "INTEGRATION_USER_NAME": {
         "description": "Salesforce Developer Edition Username",
