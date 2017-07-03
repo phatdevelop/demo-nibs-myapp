@@ -76,13 +76,13 @@ a {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    color: #ffffff;
+    color: #0b73ff;
 }
 
 .welcome h2 {
     font-family: "Source Sans Light";
-    font-size: 2.4rem;
-    color: #ffffff;
+    font-size: 2.6rem;
+    color: #0b73ff;
     line-height: 1.8rem;
 }
 
@@ -136,7 +136,7 @@ a {
 }
 
 .welcome .button-clear {
-    color: #eeeeee;
+    color: #0b73ff;
 }
 
 .menu-left h1 {
@@ -251,29 +251,29 @@ a {
 }
 
 .bar-status {
-    border-color: #73732E;
-    background-color: #73732E;
+    border-color: #75afff;
+    background-color: #75afff;
     background-image: none;
     color: #fff;
 }
 
 .bar-status1 {
-    border-color: #73732E;
-    background-color: #73732E;
+    border-color: #75afff;
+    background-color: #75afff;
     background-image: none;
     color: #fff;
 }
 
 .bar-status2 {
-    border-color: #A87E21;
-    background-color: #A87E21;
+    border-color: #0b73ff;
+    background-color: #0b73ff;
     background-image: none;
     color: #fff;
 }
 
 .bar-status3 {
-    border-color: #802E13;
-    background-color: #802E13;
+    border-color: #005ad5;
+    background-color: #005ad5;
     background-image: none;
     color: #fff;
 }
@@ -281,8 +281,8 @@ a {
 
 .button-status,
 {
-    border-color: #73732E;
-    background-color: #73732E;
+    border-color: #75afff;
+    background-color: #75afff;
     background-image: none;
     color: #fff;
 }
@@ -290,15 +290,15 @@ a {
 .button-status1,
 .button-status1:hover,
 .button-status1:active {
-    background-color: #73732E;
+    background-color: #75afff;
     color: #fff;
 }
 
 .button-status2,
 .button-status2:hover,
 .button-status2:active {
-    border-color: #A87E21;
-    background-color: #A87E21;
+    border-color: #0b73ff;
+    background-color: #0b73ff;
     background-image: none;
     color: #fff;
 }
@@ -306,8 +306,8 @@ a {
 .button-status3,
 .button-status3:hover,
 .button-status3:active {
-    border-color: #802E13;
-    background-color: #802E13;
+    border-color: #005ad5;
+    background-color: #005ad5;
     background-image: none;
     color: #fff;
 }
@@ -355,19 +355,19 @@ a {
 }
 
 .status-bar>div:nth-of-type(1) {
-    border-top: solid 2px #73732E;
-    color: #73732E !important;
+    border-top: solid 2px #75afff;
+    color: #75afff !important;
 }
 
 .status-bar>div:nth-of-type(2) {
-    border-top: solid 2px #A87E21;
-    color: #A87E21 !important;
+    border-top: solid 2px #0b73ff;
+    color: #0b73ff !important;
     text-align: center;
 }
 
 .status-bar>div:nth-of-type(3) {
-    border-top: solid 2px #802E13;
-    color: #802E13 !important;
+    border-top: solid 2px #005ad5;
+    color: #005ad5 !important;
     text-align: right;
 }
 
@@ -387,27 +387,27 @@ a {
 }
 
 .status1-bg {
-    background: #73732E;
+    background: #75afff;
 }
 
 .status2-bg {
-    background: #A87E21;
+    background: #0b73ff;
 }
 
 .status3-bg {
-    background: #802E13;
+    background: #005ad5;
 }
 
 .status1 {
-    color: #73732E;
+    color: #75afff;
 }
 
 .status2 {
-    color: #A87E21;
+    color: #0b73ff;
 }
 
 .status3 {
-    color: #802E13;
+    color: #005ad5;
 }
 
 .icon-status1 {
@@ -502,7 +502,7 @@ a {
 
 .menu,
 .menu .item-content {
-    background-color: #69625A;
+    background-color: #004197;
 }
 
 .menu .item-content {
