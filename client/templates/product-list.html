@@ -11,7 +11,7 @@
                 on-refresh="doRefresh()">
         </ion-refresher>
 
-        <div ng-repeat="product in products" class="list card">
+        <div ng-repeat="product in products track by $index" class="list card">
             <a ui-sref="app.product-detail({productId: product.id})">
                 <div class="item">
                     <h2>{{product.name}}</h2>
@@ -24,5 +24,7 @@
                 </div>
             </a>
         </div>
+        <ion-infinite-scroll on-infinite="loadItem()" ng-if="!noMoreItems"></ion-infinite-scroll>
+        
     </ion-content>
 </ion-view>

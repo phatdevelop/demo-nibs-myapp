@@ -37,11 +37,11 @@ function addItem(req, res, next) {
  * @param next
  */
 function getItems(req, res, next) {
-
+    var offset = req.params.offset
+    var limit = req.params.limit
     var externalUserId = req.externalUserId;
     console.log('external user id:' + externalUserId);
-
-    db.query("SELECT contact__r__loyaltyid__c AS userId, campaign__c AS campaign, type__c AS type, name__c as name, picture__c as picture, points__c as points, createdDate FROM salesforce.interaction__c WHERE contact__r__loyaltyid__c=$1 ORDER BY id DESC LIMIT 20", [externalUserId])
+    db.query("SELECT contact__r__loyaltyid__c AS userId, campaign__c AS campaign, type__c AS type, name__c as name, picture__c as picture, points__c as points, createdDate FROM salesforce.interaction__c WHERE contact__r__loyaltyid__c=$1 ORDER BY id DESC OFFSET $2 LIMIT $3", [externalUserId, offset, limit])
         .then(function (activities) {
             console.log(JSON.stringify(activities));
             return res.send(JSON.stringify(activities));

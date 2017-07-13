@@ -20,8 +20,8 @@ angular.module('nibs.activity', [])
     // Services
     .factory('Activity', function ($http, $rootScope) {
         return {
-            all: function() {
-                return $http.get($rootScope.server.url + '/activities');
+            all: function(offset, limit) {
+                return $http.get($rootScope.server.url + '/activities/' + offset + '/' + limit);
             },
             create: function(activity) {
                 return $http.post($rootScope.server.url + '/activities/', activity);
@@ -34,15 +34,28 @@ angular.module('nibs.activity', [])
 
     //Controllers
     .controller('ActivityCtrl', function ($scope, $state, Activity) {
-        Activity.all().success(function(activities) {
-            $scope.activities = activities
-        });
+        const firstLoadOffset = 0
+        const firstLoadLimit  = 10
 
         $scope.doRefresh = function() {
-            Activity.all().success(function(activities) {
+            Activity.all(firstLoadOffset, firstLoadLimit).success(function(activities) {
                 $scope.activities = activities;
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
 
+        $scope.activities = []
+        $scope.noMoreItems = false;
+        $scope.loadItem = function() {
+            var offset = $scope.activities.length == 0 ? firstLoadOffset : $scope.activities.length
+            var limit  = $scope.activities.length == 0 ? firstLoadLimit : 5
+            Activity.all(offset, limit).success(function(activities) {
+                if (activities.length != 0) {
+                    $scope.activities = $scope.activities.concat(activities)
+                } else {
+                    $scope.noMoreItems = true;
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete')
+            });
+        }
     });

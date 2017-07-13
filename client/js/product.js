@@ -29,8 +29,8 @@ angular.module('nibs.product', ['openfb', 'nibs.status', 'nibs.activity', 'nibs.
     // REST resource for access to Products data
     .factory('Product', function ($http, $rootScope) {
         return {
-            all: function() {
-                return $http.get($rootScope.server.url + '/products');
+            all: function(offset, limit) {
+                return $http.get($rootScope.server.url + '/products/' + offset + '/' + limit);
             },
             get: function(productId) {
                 return $http.get($rootScope.server.url + '/products/' + productId);
@@ -39,18 +39,30 @@ angular.module('nibs.product', ['openfb', 'nibs.status', 'nibs.activity', 'nibs.
     })
 
     .controller('ProductListCtrl', function ($scope, Product, OpenFB) {
-
-        Product.all().success(function(products) {
-            $scope.products = products;
-        });
+        const firstLoadOffset = 0
+        const firstLoadLimit  = 10
 
         $scope.doRefresh = function() {
-            Product.all().success(function(products) {
+            Product.all(firstLoadOffset, firstLoadLimit).success(function(products) {
                 $scope.products = products;
                 $scope.$broadcast('scroll.refreshComplete');
             });
         }
 
+        $scope.products = []
+        $scope.noMoreItems = false;
+        $scope.loadItem = function() {
+            var offset = $scope.products.length == 0 ? firstLoadOffset : $scope.products.length
+            var limit  = $scope.products.length == 0 ? firstLoadLimit : 5
+            Product.all(offset, limit).success(function(products) {
+                if (products.length != 0) {
+                    $scope.products = $scope.products.concat(products)
+                } else {
+                    $scope.noMoreItems = true;
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete')
+            });
+        }
     })
 
     .controller('ProductDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, Product, OpenFB, WishListItem, Activity, Status) {

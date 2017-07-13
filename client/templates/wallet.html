@@ -5,7 +5,8 @@
     </ion-nav-buttons>
 
     <ion-content has-header="true" padding="true">
-        <div ng-repeat="offer in walletItems" class="list card">
+
+        <div ng-repeat="offer in walletItems track by $index" class="list card">
             <div class="item">
                 <h2>{{offer.name}}</h2>
                 <p>期限　 {{offer.enddate | date:'yyyy年M月d日（EEE）'}}</p>
@@ -18,8 +19,9 @@
                     <i class="icon ion-trash-a"></i>
                 </a>
             </div>
-
         </div>
+        <ion-infinite-scroll on-infinite="loadItem()" ng-if="!noMoreItems"></ion-infinite-scroll>
+        
     </ion-content>
 
     <p ng-if="!loading && walletItems.length === 0" class="centered-message">お気に入りの特典はありません</p>

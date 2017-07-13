@@ -23,7 +23,7 @@
         </div> 
         -->
 
-        <div ng-repeat="offer in offers" class="list card">
+        <div ng-repeat="offer in offers track by $index" class="list card">
             <a ui-sref="app.offer-detail({offerId: offer.id})">
                 <div class="item">
                     <h2>{{offer.name}}</h2>
@@ -36,8 +36,8 @@
                 </div>
             </a>
         </div>
-
-
+        <ion-infinite-scroll on-infinite="loadItem()" ng-if="!noMoreItems"></ion-infinite-scroll>
+        
     </ion-content>
 
 </ion-view>

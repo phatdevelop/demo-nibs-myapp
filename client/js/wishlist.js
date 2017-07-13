@@ -20,8 +20,8 @@ angular.module('nibs.wishlist', [])
     // Services
     .factory('WishListItem', function ($http, $rootScope) {
         return {
-            all: function() {
-                return $http.get($rootScope.server.url + '/wishlist');
+            all: function(offset, limit) {
+                return $http.get($rootScope.server.url + '/wishlist/' + offset + '/' + limit);
             },
             create: function(wishlistItem) {
                 return $http.post($rootScope.server.url + '/wishlist', wishlistItem);
@@ -34,12 +34,8 @@ angular.module('nibs.wishlist', [])
 
     // Controllers
     .controller('WishListCtrl', function ($scope, WishListItem) {
-
-        function all() {
-            WishListItem.all().success(function(products) {
-                $scope.products = products;
-            });
-        }
+        const firstLoadOffset = 0
+        const firstLoadLimit  = 10
 
         $scope.deleteItem = function(product) {
             WishListItem.del(product.id).success(function() {
@@ -47,6 +43,18 @@ angular.module('nibs.wishlist', [])
             });
         };
 
-        all();
-
+        $scope.products = []
+        $scope.noMoreItems = false;
+        $scope.loadItem = function() {
+            var offset = $scope.products.length == 0 ? firstLoadOffset : $scope.products.length
+            var limit  = $scope.products.length == 0 ? firstLoadLimit : 5
+            WishListItem.all(offset, limit).success(function(products) {
+                if (products.length != 0) {
+                    $scope.products = $scope.products.concat(products)
+                } else {
+                    $scope.noMoreItems = true;
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete')
+            });
+        }
     });

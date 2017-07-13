@@ -34,14 +34,13 @@ angular.module('nibs.offer', ['openfb', 'nibs.status', 'nibs.activity', 'nibs.wa
                     }
                 }
             })
-
     })
 
     // Services
     .factory('Offer', function ($http, $rootScope) {
         return {
-            all: function() {
-                return $http.get($rootScope.server.url + '/offers');
+            all: function(offset, limit) {
+                return $http.get($rootScope.server.url + '/offers/' + offset + '/' + limit);
             },
             get: function(offerId) {
                 return $http.get($rootScope.server.url + '/offers/' + offerId);
@@ -51,16 +50,30 @@ angular.module('nibs.offer', ['openfb', 'nibs.status', 'nibs.activity', 'nibs.wa
 
     //Controllers
     .controller('OfferListCtrl', function ($scope, $rootScope, $ionicPopup, $ionicModal, Offer, User) {
-        Offer.all().success(function(offers) {
-            $scope.offers = offers;
-        });
+        const firstLoadOffset = 0
+        const firstLoadLimit  = 10
 
         $scope.doRefresh = function() {
-            $scope.offers = Offer.all().success(function(offers) {
+            $scope.offers = Offer.all(firstLoadOffset, firstLoadLimit).success(function(offers) {
                 $scope.offers = offers;
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
+
+        $scope.offers = []
+        $scope.noMoreItems = false;
+        $scope.loadItem = function() {
+            var offset = $scope.offers.length == 0 ? firstLoadOffset : $scope.offers.length
+            var limit  = $scope.offers.length == 0 ? firstLoadLimit : 5
+            Offer.all(offset, limit).success(function(offers) {
+                if (offers.length != 0) {
+                    $scope.offers = $scope.offers.concat(offers)
+                } else {
+                    $scope.noMoreItems = true;
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete')
+            });
+        }
     })
 
     .controller('OfferDetailCtrl', function ($rootScope, $scope, $state, $ionicPopup, $stateParams, Offer, OpenFB, WalletItem, Activity, Status) {

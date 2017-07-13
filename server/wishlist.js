@@ -62,9 +62,11 @@ function deleteItems(userId) {
  * @param next
  */
 function getItems(req, res, next) {
+    var offset = req.params.offset
+    var limit = req.params.limit
     var userId = req.userId;
-    db.query("SELECT id, name, description, image__c AS image, productPage__c AS productPage, publishDate__c AS publishDate FROM wishlist, salesforce.product2 WHERE productId = id AND userId=$1 ORDER BY publishDate DESC LIMIT $2",
-            [userId, 20])
+    db.query("SELECT id, name, description, image__c AS image, productPage__c AS productPage, publishDate__c AS publishDate FROM wishlist, salesforce.product2 WHERE productId = id AND userId=$1 AND IsActive = true ORDER BY publishDate DESC, name DESC, id DESC OFFSET $2 LIMIT $3",
+            [userId, offset, limit])
         .then(function (products) {
             return res.send(JSON.stringify(products));
         })

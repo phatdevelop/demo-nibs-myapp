@@ -11,7 +11,7 @@
                 on-refresh="doRefresh()">
         </ion-refresher>
 
-        <div ng-repeat="activity in activities" class="list" style="margin: 0; margin-bottom: -1px">
+        <div ng-repeat="activity in activities track by $index" class="list" style="margin: 0; margin-bottom: -1px">
             <a class="item item-thumbnail-left" href="#">
                 <img ng-src="{{activity.picture}}" class="activity-pic">
                 <h3>{{activity.name}}</h3>
@@ -19,7 +19,8 @@
                 <p style="color:#805959;margin: 0;padding:0;font-size: 16px;"><img src="css/img/points.png" height="28" style="float:left;margin-right:6px;" /><span style="padding-top: 4px;display: block;">{{activity.points | number:0 }} points</span></p>
             </a>
         </div>
-
+        <ion-infinite-scroll on-infinite="loadItem()" ng-if="!noMoreItems"></ion-infinite-scroll>
+        
     </ion-content>
 
     <p ng-if="!loading && activities.length === 0" class="centered-message">最近の活動はありません</p>

@@ -20,8 +20,8 @@ angular.module('nibs.wallet', [])
     // Services
     .factory('WalletItem', function ($http, $rootScope) {
         return {
-            all: function() {
-                return $http.get($rootScope.server.url + '/wallet');
+            all: function(offset, limit) {
+                return $http.get($rootScope.server.url + '/wallet/' + offset + '/' + limit);
             },
             create: function(walletItem) {
                 return $http.post($rootScope.server.url + '/wallet', walletItem);
@@ -34,12 +34,8 @@ angular.module('nibs.wallet', [])
 
     //Controllers
     .controller('WalletCtrl', function ($scope, WalletItem) {
-
-        function all() {
-            WalletItem.all().success(function(walletItems) {
-                $scope.walletItems = walletItems;
-            });
-        }
+        const firstLoadOffset = 0
+        const firstLoadLimit  = 10
 
         $scope.deleteItem = function(offer) {
             WalletItem.del(offer.id).success(function() {
@@ -47,6 +43,18 @@ angular.module('nibs.wallet', [])
             });
         };
 
-        all();
-
+        $scope.walletItems = []
+        $scope.noMoreItems = false;
+        $scope.loadItem = function() {
+            var offset = $scope.walletItems.length == 0 ? firstLoadOffset : $scope.walletItems.length
+            var limit  = $scope.walletItems.length == 0 ? firstLoadLimit : 5
+            WalletItem.all(offset, limit).success(function(walletItems) {
+                if (walletItems.length != 0) {
+                    $scope.walletItems = $scope.walletItems.concat(walletItems)
+                } else {
+                    $scope.noMoreItems = true;
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete')
+            });
+        }
     });
