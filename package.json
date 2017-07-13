@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/ccoenraets/loyalty",
   "engines": {
-    "node": "0.10.35"
+    "node": "6.11.1"
   },
   "dependencies": {
     "logfmt": "~0.21.0",
-    "bcrypt": "~0.7.7",
-    "pg": "~2.11.1",
+    "bcrypt": "~1.0.2",
+    "pg": "~6.4.0",
     "node-uuid": "~1.4.1",
     "validator": "~3.5.0",
     "winston": "~0.7.3",

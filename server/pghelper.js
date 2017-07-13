@@ -1,4 +1,4 @@
-var pg = require('pg').native,
+var pg = require('pg'),
     config = require('./config'),
     Q = require('q'),
     winston = require('winston'),
