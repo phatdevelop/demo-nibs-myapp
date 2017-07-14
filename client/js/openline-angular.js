@@ -1,14 +1,15 @@
 angular.module('openline', [])
 	.factory('OpenLINE', function ($rootScope, $q, $window, $http) {
 		var LINE_LOGIN_URL = 'https://access.line.me/dialog/oauth/weblogin'
-		var LINE_CHANNEL_ID = '1524762961'
 		var CALLBACK_URL = 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html'
+		var line_channel_id
 		var state = 'randomState'
 
 		//var deferredLogin
 		var tokenStore = window.sessionStorage
 
-		function init(store) {
+		function init(channelId, store) {
+			line_channel_id = channelId;
             if (store) tokenStore = store;
         }
 
@@ -27,7 +28,7 @@ angular.module('openline', [])
    //          }
             //deferredLogin = $q.defer();
 
-            loginWindow = $window.open(LINE_LOGIN_URL + '?client_id=' + LINE_CHANNEL_ID + '&redirect_uri=' + CALLBACK_URL + '&state=' + state + '&response_type=token&display=popup&scope=' + lineScope, '_blank', 'location=no');
+            loginWindow = $window.open(LINE_LOGIN_URL + '?client_id=' + line_channel_id + '&redirect_uri=' + CALLBACK_URL + '&state=' + state + '&response_type=token&display=popup&scope=' + lineScope, '_blank', 'location=no');
 
             //loginWindow.addEventListener('loadstart', loginWindowLoadStart);
             //loginWindow.addEventListener('exit', loginWindowExit);

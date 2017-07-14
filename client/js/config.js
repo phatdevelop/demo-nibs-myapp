@@ -4,6 +4,8 @@ angular.module('nibs.config', [])
 
     .constant('FB_APP_ID','1618878675020266')
 
+    .constant('LINE_CHANNEL_ID', '1524762961')
+
     .constant('STATUS_LABELS', [
         'Forastero',
         'Trinitario',
