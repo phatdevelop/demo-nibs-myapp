@@ -1,4 +1,4 @@
-angular.module('nibs.auth', ['openfb', 'nibs.openline', 'nibs.config'])
+angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
 
     /*
      * Routes
