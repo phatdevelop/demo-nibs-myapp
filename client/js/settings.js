@@ -1,4 +1,4 @@
-angular.module('nibs.settings', ['openfb', 'nibs.activity'])
+angular.module('nibs.settings', ['openfb', 'openline', 'nibs.activity'])
 
     // Routes
     .config(function ($stateProvider) {
@@ -17,7 +17,7 @@ angular.module('nibs.settings', ['openfb', 'nibs.activity'])
 
     })
 
-    .controller('SettingsCtrl', function ($scope, $rootScope, $window, $ionicPopup, $document, $state, OpenFB, Activity, Picture) {
+    .controller('SettingsCtrl', function ($scope, $rootScope, $window, $ionicPopup, $document, $state, OpenFB, OpenLINE, Activity, Picture) {
 
         $scope.deleteActivities = function() {
             Activity.deleteAll().success(function() {
