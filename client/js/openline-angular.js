@@ -1,4 +1,4 @@
-angular.module('openline', [])
+angular.module('nibs.openline', [])
 	.factory('OpenLINE', function ($rootScope, $q, $window, $http) {
 		var LINE_LOGIN_URL = 'https://access.line.me/dialog/oauth/weblogin';
 		var CALLBACK_URL = 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html';
