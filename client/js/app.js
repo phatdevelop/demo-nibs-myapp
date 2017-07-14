@@ -9,8 +9,9 @@ var app = angular.module('nibs', ['ionic', 'openfb', 'openline', 'nibs.config', 
         $rootScope.server = {url: SERVER_URL || location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '')};
 
         // Intialize OpenFB Facebook library
+        console.log(OpenFB)
         OpenFB.init(FB_APP_ID, $window.localStorage);
-
+        console.log(OpenFB)
         $ionicPlatform.ready(function() {
             if(window.StatusBar) {
                 StatusBar.styleDefault();
