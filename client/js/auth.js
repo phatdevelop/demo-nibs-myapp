@@ -167,9 +167,21 @@ angular.module('nibs.auth', ['openfb', 'nibs.openline', 'nibs.config'])
 
         $scope.lineLogin = function() {
             console.log(OpenLINE)
-            OpenLINE.login('email, publish_actions').then(function() {
+            // OpenLINE.login('email, publish_actions').then(function() {
                 
-            })
+            // })
+
+            var LINE_LOGIN_URL = 'https://access.line.me/dialog/oauth/weblogin';
+            var CALLBACK_URL = 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html';
+            var line_channel_id;
+            var state = 'randomState';
+
+            //var deferredLogin
+            var tokenStore = window.sessionStorage;
+            var loginWindow;
+
+            loginWindow = $window.open(LINE_LOGIN_URL + '?client_id=' + line_channel_id + '&redirect_uri=' + CALLBACK_URL + '&state=' + state + '&response_type=token&display=popup&scope=' + lineScope, '_blank', 'location=no');
+
         }
 
     })
