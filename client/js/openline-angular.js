@@ -1,12 +1,12 @@
 angular.module('openline', [])
 	.factory('OpenLINE', function ($rootScope, $q, $window, $http) {
-		var LINE_LOGIN_URL = 'https://access.line.me/dialog/oauth/weblogin'
-		var CALLBACK_URL = 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html'
-		var line_channel_id
-		var state = 'randomState'
+		var LINE_LOGIN_URL = 'https://access.line.me/dialog/oauth/weblogin';
+		var CALLBACK_URL = 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html';
+		var line_channel_id;
+		var state = 'randomState';
 
 		//var deferredLogin
-		var tokenStore = window.sessionStorage
+		var tokenStore = window.sessionStorage;
 
 		function init(channelId, store) {
 			line_channel_id = channelId;
@@ -14,7 +14,7 @@ angular.module('openline', [])
         }
 
 		function login(lineScope) {
-			var loginWindow
+			var loginWindow;
 
 			// function loginWindowLoadStart(event) {
    //              var url = event.url;
@@ -54,7 +54,7 @@ angular.module('openline', [])
   //               deferredLogin.reject();
   //           }
   //       }
-	})
+	});
 
 // Global function called back by the OAuth login dialog
 // function oauthCallback(url) {
