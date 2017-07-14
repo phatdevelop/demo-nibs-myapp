@@ -21,7 +21,7 @@ angular.module('openline', [])
                 }
             }
             deferredLogin = $q.defer();
-            
+
             loginWindow = $window.open(LINE_LOGIN_URL + '?client_id=' + LINE_CHANNEL_ID + '&redirect_uri=' + CALLBACK_URL + '&state=' + state +
                 '&response_type=token&display=popup&scope=' + lineScope, '_blank', 'location=no');
 
@@ -50,3 +50,11 @@ angular.module('openline', [])
             }
         }
 	})
+
+// Global function called back by the OAuth login dialog
+function oauthCallback(url) {
+    var injector = angular.element(document.getElementById('main')).injector();
+    injector.invoke(function (OpenLINE) {
+        OpenLINE.oauthCallback(url);
+    });
+}
