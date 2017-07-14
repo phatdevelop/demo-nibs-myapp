@@ -6,6 +6,12 @@ angular.module('openline', [])
 		var state = 'randomState'
 
 		var deferredLogin
+		var tokenStore = window.sessionStorage
+
+		function init(store) {
+            //fbAppId = appId;
+            if (store) tokenStore = store;
+        }
 
 		function login(lineScope) {
 			var loginWindow

@@ -10,6 +10,7 @@ var app = angular.module('nibs', ['ionic', 'openfb', 'openline', 'nibs.config', 
 
         // Intialize OpenFB Facebook library
         OpenFB.init(FB_APP_ID, $window.localStorage);
+        OpenLINE.init($window.localStorage);
         $ionicPlatform.ready(function() {
             if(window.StatusBar) {
                 StatusBar.styleDefault();
