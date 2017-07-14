@@ -1,4 +1,4 @@
-angular.module('nibs.product', ['openfb', 'openline', 'nibs.status', 'nibs.activity', 'nibs.wishlist'])
+angular.module('nibs.product', ['openfb', 'nibs.status', 'nibs.activity', 'nibs.wishlist'])
 
     .config(function ($stateProvider) {
 
