@@ -118,7 +118,6 @@ angular.module('openline', [])
             loginSucceeded = true;
             if (url.indexOf("code=") > 0) {
                 queryString = url.substr(url.indexOf('#') + 1);
-                window.open(url, '_blank');
                 obj = parseQueryString(queryString);
                 tokenStore['linetoken'] = obj['code'];
                 deferredLogin.resolve();
