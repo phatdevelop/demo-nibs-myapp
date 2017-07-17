@@ -9,7 +9,8 @@ angular.module('openline', [])
         // By default we store fbtoken in sessionStorage. This can be overriden in init()
             tokenStore = window.sessionStorage,
 
-            lineAppId,
+            channelId,
+            channelSecret,
             oauthRedirectURL,
 
         // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
@@ -19,8 +20,9 @@ angular.module('openline', [])
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
             loginSucceeded;
 
-        function init(appId, store) {
-            lineAppId = appId;
+        function init(channelId, channelSecret, store) {
+            channelId = channelId;
+            channelSecret = channelSecret;
             if (store) tokenStore = store;
         }
 
@@ -46,14 +48,14 @@ angular.module('openline', [])
                 loginWindow = null;
             }
 
-            if (!lineAppId) {
-                return error({error: 'Line App Id not set.'});
+            if (!channelId) {
+                return error({error: 'Line Channel Id not set.'});
             }
 
             deferredLogin = $q.defer();
 
             loginSucceeded = false;
-            loginWindow = $window.open(LOGIN_URL + '?client_id=' + lineAppId + '&redirect_uri=' + CALLBACK_URL + '&state=123abc' +
+            loginWindow = $window.open(LOGIN_URL + '?client_id=' + channelId + '&redirect_uri=' + CALLBACK_URL + '&state=123abc' +
                 '&response_type=code&display=popup', '_blank', 'location=no');
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
@@ -91,7 +93,6 @@ angular.module('openline', [])
          * OAuth workflow.
          */
         function oauthCallback(url) {
-
             // Parse the OAuth data received from Facebook
             var queryString, obj;
 
@@ -100,7 +101,7 @@ angular.module('openline', [])
                 queryString = url.substr(url.indexOf('?') + 1);
                 obj = parseQueryString(queryString);
                 //tokenStore['linetoken'] = obj['code'];
-                tokenStore['line_code'] = obj['code'];
+                tokenStore['code'] = obj['code'];
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
                 queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
@@ -143,10 +144,8 @@ angular.module('openline', [])
         //  *  params:  queryString parameters as a map - Optional
         //  */
         function api(obj) {
-
             var method = obj.method || 'GET',
                 params = obj.params || {};
-
             //params['code'] = tokenStore['linetoken'];
 
             return $http({
@@ -182,7 +181,7 @@ angular.module('openline', [])
         }
 
         function getAccessToken() {
-            var line_code = tokenStore['line_code'];
+            var authorizationCode = tokenStore['code'];
 
             return $http({
                 method: 'POST',
@@ -191,9 +190,9 @@ angular.module('openline', [])
                     'Content-Type': 'application/x-www-form-urlencoded'},
                 params: {
                     grant_type: 'authorization_code',
-                    client_id: lineAppId,
-                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
-                    code: line_code,
+                    client_id: channelId,
+                    client_secret: channelSecret,
+                    code: authorizationCode,
                     redirect_uri: CALLBACK_URL
                 }
             })

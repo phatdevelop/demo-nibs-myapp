@@ -6,6 +6,8 @@ angular.module('nibs.config', [])
 
     .constant('LINE_CHANNEL_ID', '1524762961')
 
+    .constant('LINE_CHANNEL_SECRET', '59887b50400fcd8bd40359b9045ce39b')
+
     .constant('STATUS_LABELS', [
         'Forastero',
         'Trinitario',
