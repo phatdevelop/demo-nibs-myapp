@@ -18,7 +18,7 @@ var express = require('express'),
     pictures = require('./server/pictures'),
     auth = require('./server/auth'),
     facebook = require('./server/facebook'),
-    //line = require('./server/line'),
+    line = require('./server/line'),
     s3signing = require('./server/s3signing'),
     activities = require('./server/activities'),
     app = express();
@@ -43,7 +43,7 @@ app.post('/login', auth.login);
 app.post('/logout', auth.validateToken, auth.logout);
 app.post('/signup', auth.signup);
 app.post('/fblogin', facebook.login);
-//app.post('/linelogin', line.login);
+app.post('/linelogin', line.login);
 
 app.get('/users/me', auth.validateToken, users.getProfile);
 app.put('/users/me', auth.validateToken, users.updateProfile);
