@@ -39,23 +39,20 @@ angular.module('openline', [])
             //var startTime = new Date().getTime();
             function loginWindowLoadStart(event) {
                 var url = event.url;
-                console.log('url: ' + url);
-                console.log(url.indexOf("code="));
-                console.log(url.indexOf("error="));
                 // if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
                 //     loginWindow.close();
                 //     oauthCallback(url);
                 // }
             }
 
-            function loginWindowExit() {
-                console.log('exit and remove listeners');
-                // Handle the situation where the user closes the login window manually before completing the login process
-                deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
-                loginWindow.removeEventListener('loadstop', loginWindowLoadStart);
-                loginWindow.removeEventListener('exit', loginWindowExit);
-                loginWindow = null;
-            }
+            // function loginWindowExit() {
+            //     console.log('exit and remove listeners');
+            //     // Handle the situation where the user closes the login window manually before completing the login process
+            //     deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
+            //     loginWindow.removeEventListener('loadstop', loginWindowLoadStart);
+            //     loginWindow.removeEventListener('exit', loginWindowExit);
+            //     loginWindow = null;
+            // }
 
             // if (!lineAppId) {
             //     return error({error: 'Line App Id not set.'});
