@@ -189,8 +189,10 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
 
         $scope.lineLogin = function() {
             console.log(OpenLINE);
-            var token =  OpenLINE.login();
-            console.log('token: ' + token);
+            var token =  OpenLINE.login(function() {
+                console.log('token: ' + token);
+            });
+            
             // OpenLINE.login(function(data) {
             //         OpenLINE.getAccessToken('6k1UuTKRlBkRU1m4vs51')
             //             .success(function(data) {
