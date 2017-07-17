@@ -200,20 +200,20 @@ angular.module('openline', [])
             return api({method: 'GET', path: path, params: params});
         }
 
-        // function getAccessToken(code) {
-        //     return $http({
-        //         method: 'POST',
-        //         url: 'https://api.line.me/v2/oauth/accessToken',
-        //         header: 'ContentType: application/x-www-form-urlencoded',
-        //         params: {
-        //             grant_type: 'authorization_code',
-        //             client_id: lineAppId,
-        //             client_secret: '59887b50400fcd8bd40359b9045ce39b',
-        //             code: code,
-        //             redirect_uri: CALLBACK_URL
-        //         }
-        //     })
-        // }
+        function getAccessToken(code) {
+            return $http({
+                method: 'POST',
+                url: 'https://api.line.me/v2/oauth/accessToken',
+                header: 'ContentType: application/x-www-form-urlencoded',
+                params: {
+                    grant_type: 'authorization_code',
+                    client_id: lineAppId,
+                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
+                    code: code,
+                    redirect_uri: CALLBACK_URL
+                }
+            })
+        }
 
         function parseQueryString(queryString) {
             var qs = decodeURIComponent(queryString),
