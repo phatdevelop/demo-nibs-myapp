@@ -39,20 +39,23 @@ angular.module('openline', [])
             //var startTime = new Date().getTime();
             function loginWindowLoadStart(event) {
                 var url = event.url;
-                // if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
-                //     loginWindow.close();
-                //     oauthCallback(url);
-                // }
+                console.log('url: ' + url);
+                console.log(url.indexOf("code="));
+                console.log(url.indexOf("error="));
+                if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
+                    loginWindow.close();
+                    oauthCallback(url);
+                }
             }
 
-            // function loginWindowExit() {
-            //     console.log('exit and remove listeners');
-            //     // Handle the situation where the user closes the login window manually before completing the login process
-            //     deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
-            //     loginWindow.removeEventListener('loadstop', loginWindowLoadStart);
-            //     loginWindow.removeEventListener('exit', loginWindowExit);
-            //     loginWindow = null;
-            // }
+            function loginWindowExit() {
+                console.log('exit and remove listeners');
+                // Handle the situation where the user closes the login window manually before completing the login process
+                deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
+                loginWindow.removeEventListener('loadstop', loginWindowLoadStart);
+                loginWindow.removeEventListener('exit', loginWindowExit);
+                loginWindow = null;
+            }
 
             // if (!lineAppId) {
             //     return error({error: 'Line App Id not set.'});
@@ -77,7 +80,7 @@ angular.module('openline', [])
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
-            //loginWindow.addEventListener('loadstart', loginWindowLoadStart);
+            loginWindow.addEventListener('loadstart', loginWindowLoadStart);
             //loginWindow.addEventListener('exit', loginWindowExit);
             //}
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
@@ -213,7 +216,7 @@ angular.module('openline', [])
             // revokePermissions: revokePermissions,
             api: api,
             // post: post,
-            get: get,
+            //get: get,
             // isLoggedIn: isLoggedIn,
             oauthCallback: oauthCallback
         }
