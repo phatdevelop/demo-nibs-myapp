@@ -2,9 +2,9 @@ angular.module('openline', [])
 
     .factory('OpenLINE', function ($rootScope, $q, $window, $http) {
 
-        var LINE_LOGIN_URL = 'https://access.line.me/dialog/oauth/weblogin',
+        var LOGIN_URL = 'https://access.line.me/dialog/oauth/weblogin',
 
-            LINE_CALLBACK_URL = 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html',
+            CALLBACK_URL = 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html',
 
         // By default we store fbtoken in sessionStorage. This can be overriden in init()
             tokenStore = window.sessionStorage,
@@ -75,13 +75,13 @@ angular.module('openline', [])
             //     oauthRedirectURL = baseURL + '/oauthcallback.html';
             // }
             
-            loginWindow = $window.open(LINE_LOGIN_URL + '?client_id=' + lineAppId + '&redirect_uri=' + LINE_CALLBACK_URL + '&state=123abc' +
+            loginWindow = $window.open(LOGIN_URL + '?client_id=' + lineAppId + '&redirect_uri=' + CALLBACK_URL + '&state=123abc' +
                 '&response_type=code&display=popup', '_blank', 'location=no');
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
             loginWindow.addEventListener('loadstart', loginWindowLoadStart);
-            //loginWindow.addEventListener('exit', loginWindowExit);
+            loginWindow.addEventListener('exit', loginWindowExit);
             //}
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
             // oauthCallback() function. See oauthcallback.html for details.
@@ -170,7 +170,11 @@ angular.module('openline', [])
 
             params['code'] = tokenStore['linetoken'];
 
-            return $http({method: method, url: 'https://graph.facebook.com' + obj.path, params: params})
+            return $http({
+                            method: method, 
+                            url: 'https://api.line.me/v2/profile' + obj.path, 
+                            headers: 'Authorization: Bearer ' + params['code'],
+                            params: params})
                 .error(function(data, status, headers, config) {
                     if (data.error && data.error.type === 'OAuthException') {
                         $rootScope.$emit('OAuthException');
@@ -198,16 +202,31 @@ angular.module('openline', [])
             return api({method: 'GET', path: path, params: params});
         }
 
-        // function parseQueryString(queryString) {
-        //     var qs = decodeURIComponent(queryString),
-        //         obj = {},
-        //         params = qs.split('&');
-        //     params.forEach(function (param) {
-        //         var splitter = param.split('=');
-        //         obj[splitter[0]] = splitter[1];
-        //     });
-        //     return obj;
+        // function getAccessToken(code) {
+        //     return $http({
+        //         method: 'POST',
+        //         url: 'https://api.line.me/v2/oauth/accessToken',
+        //         header: 'ContentType: application/x-www-form-urlencoded',
+        //         params: {
+        //             grant_type: 'authorization_code',
+        //             client_id: lineAppId,
+        //             client_secret: '59887b50400fcd8bd40359b9045ce39b',
+        //             code: code,
+        //             redirect_uri: CALLBACK_URL
+        //         }
+        //     })
         // }
+
+        function parseQueryString(queryString) {
+            var qs = decodeURIComponent(queryString),
+                obj = {},
+                params = qs.split('&');
+            params.forEach(function (param) {
+                var splitter = param.split('=');
+                obj[splitter[0]] = splitter[1];
+            });
+            return obj;
+        }
 
         return {
             init: init,
