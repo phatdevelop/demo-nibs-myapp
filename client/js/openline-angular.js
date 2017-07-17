@@ -64,8 +64,7 @@ angular.module('openline', [])
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
             // oauthCallback() function. See oauthcallback.html for details.
 
-            //return deferredLogin.promise;
-            return tokenStore['linetoken'];
+            return deferredLogin.promise;
         }
 
         /**
@@ -100,7 +99,8 @@ angular.module('openline', [])
             if (url.indexOf("code=") > 0) {
                 queryString = url.substr(url.indexOf('#') + 1);
                 obj = parseQueryString(queryString);
-                tokenStore['linetoken'] = obj['code'];
+                //tokenStore['linetoken'] = obj['code'];
+                tokenStore['line_code'] = obj['code'];
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
                 queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
@@ -147,7 +147,7 @@ angular.module('openline', [])
             var method = obj.method || 'GET',
                 params = obj.params || {};
 
-            params['code'] = tokenStore['linetoken'];
+            //params['code'] = tokenStore['linetoken'];
 
             return $http({
                             method: method, 
@@ -181,7 +181,9 @@ angular.module('openline', [])
             return api({method: 'GET', path: path, params: params});
         }
 
-        function getAccessToken(code) {
+        function getAccessToken() {
+            var line_code = tokenStore['line_code'];
+            
             return $http({
                 method: 'POST',
                 url: 'https://api.line.me/v2/oauth/accessToken',
@@ -191,7 +193,7 @@ angular.module('openline', [])
                     grant_type: 'authorization_code',
                     client_id: lineAppId,
                     client_secret: '59887b50400fcd8bd40359b9045ce39b',
-                    code: code,
+                    code: line_code,
                     redirect_uri: CALLBACK_URL
                 }
             })
