@@ -11,6 +11,7 @@ angular.module('openline', [])
 
             channelId,
             oauthRedirectURL,
+            authorizationCode,
 
         // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
         // inside the module instead of keeping them local within the login function.
@@ -99,7 +100,8 @@ angular.module('openline', [])
             if (url.indexOf("code=") > 0) {
                 queryString = url.substr(url.indexOf('?') + 1);
                 obj = parseQueryString(queryString);
-                tokenStore['code'] = obj['code'];
+                //tokenStore['code'] = obj['code'];
+                authorizationCode = obj['code'];
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
                 queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
@@ -181,18 +183,19 @@ angular.module('openline', [])
         }
 
         function getAccessToken() {
-            var authorizationCode = tokenStore['code'];
+            //var authorizationCode = tokenStore['code'];
 
-            return $http.jsonp({
+            return $http.jsonp('https://api.line.me/v2/oauth/accessToken', 
+            {
                 method: 'POST',
-                url: 'https://api.line.me/v2/oauth/accessToken',
+                // url: 'https://api.line.me/v2/oauth/accessToken',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'},
                 params: {
                     grant_type: 'authorization_code',
                     client_id: channelId,
                     client_secret: '59887b50400fcd8bd40359b9045ce39b',
-                    code: 'iYG029izOHJQo6l661Sv',
+                    code: authorizationCode,
                     redirect_uri: CALLBACK_URL
                 }
             })
