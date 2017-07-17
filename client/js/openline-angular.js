@@ -183,7 +183,7 @@ angular.module('openline', [])
         function getAccessToken() {
             var authorizationCode = tokenStore['code'];
 
-            return $http({
+            return $http.jsonp({
                 method: 'POST',
                 url: 'https://api.line.me/v2/oauth/accessToken',
                 headers: {
