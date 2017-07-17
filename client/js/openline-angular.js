@@ -48,9 +48,9 @@ angular.module('openline', [])
                 loginWindow = null;
             }
 
-            if (!channelId) {
-                return error({error: 'Line Channel Id not set.'});
-            }
+            // if (!channelId) {
+            //     return error({error: 'Line Channel Id not set.'});
+            // }
 
             deferredLogin = $q.defer();
 
