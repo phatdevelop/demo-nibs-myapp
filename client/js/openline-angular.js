@@ -198,16 +198,16 @@ angular.module('openline', [])
             return api({method: 'GET', path: path, params: params});
         }
 
-        function parseQueryString(queryString) {
-            var qs = decodeURIComponent(queryString),
-                obj = {},
-                params = qs.split('&');
-            params.forEach(function (param) {
-                var splitter = param.split('=');
-                obj[splitter[0]] = splitter[1];
-            });
-            return obj;
-        }
+        // function parseQueryString(queryString) {
+        //     var qs = decodeURIComponent(queryString),
+        //         obj = {},
+        //         params = qs.split('&');
+        //     params.forEach(function (param) {
+        //         var splitter = param.split('=');
+        //         obj[splitter[0]] = splitter[1];
+        //     });
+        //     return obj;
+        // }
 
         return {
             init: init,
@@ -216,7 +216,7 @@ angular.module('openline', [])
             // revokePermissions: revokePermissions,
             api: api,
             // post: post,
-            //get: get,
+            get: get,
             // isLoggedIn: isLoggedIn,
             oauthCallback: oauthCallback
         }
