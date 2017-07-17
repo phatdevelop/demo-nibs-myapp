@@ -35,15 +35,15 @@ angular.module('openline', [])
         function login(lineScope) {
 
             var loginWindow;
-            
-            var startTime = new Date().getTime();
+
+            //var startTime = new Date().getTime();
             function loginWindowLoadStart(event) {
                 var url = event.url;
                 if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
-                    var timeout = 600 - (new Date().getTime() - startTime);
+                    //var timeout = 600 - (new Date().getTime() - startTime);
                     setTimeout(function() {
                         loginWindow.close();
-                    }, timeout > 0 ? timeout : 0);
+                    }, 1000);
                     oauthCallback(url);
                 }
             }
