@@ -211,16 +211,23 @@ angular.module('openline', [])
         //     return obj;
         // }
 
-        // return {
-        //     init: init,
-        //     login: login,
-        //     logout: logout,
-        //     revokePermissions: revokePermissions,
-        //     api: api,
-        //     post: post,
-        //     get: get,
-        //     isLoggedIn: isLoggedIn,
-        //     oauthCallback: oauthCallback
-        // }
+        return {
+            init: init,
+            login: login,
+            logout: logout,
+            revokePermissions: revokePermissions,
+            api: api,
+            post: post,
+            get: get,
+            isLoggedIn: isLoggedIn,
+            oauthCallback: oauthCallback
+        }
 
     });
+
+function oauthCallback(url) {
+    var injector = angular.element(document.getElementById('main')).injector();
+    injector.invoke(function (OpenLINE) {
+        OpenLINE.oauthCallback(url);
+    });
+}
