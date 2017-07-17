@@ -1,4 +1,4 @@
-angular.module('nibs.openline', [])
+angular.module('openline', [])
 
     .factory('OpenLINE', function ($rootScope, $q, $window, $http) {
 

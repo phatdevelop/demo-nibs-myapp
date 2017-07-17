@@ -1,4 +1,4 @@
-angular.module('nibs.settings', ['openfb', 'nibs.openline', 'nibs.activity'])
+angular.module('nibs.settings', ['openfb', 'nibs.activity'])
 
     // Routes
     .config(function ($stateProvider) {
