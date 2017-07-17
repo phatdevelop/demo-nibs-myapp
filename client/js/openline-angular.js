@@ -97,7 +97,7 @@ angular.module('openline', [])
 
             loginSucceeded = true;
             if (url.indexOf("code=") > 0) {
-                queryString = url.substr(url.indexOf('#') + 1);
+                queryString = url.substr(url.indexOf('?') + 1);
                 obj = parseQueryString(queryString);
                 //tokenStore['linetoken'] = obj['code'];
                 tokenStore['line_code'] = obj['code'];
@@ -183,7 +183,7 @@ angular.module('openline', [])
 
         function getAccessToken() {
             var line_code = tokenStore['line_code'];
-            
+
             return $http({
                 method: 'POST',
                 url: 'https://api.line.me/v2/oauth/accessToken',
