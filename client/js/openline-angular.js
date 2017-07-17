@@ -10,7 +10,6 @@ angular.module('openline', [])
             tokenStore = window.sessionStorage,
 
             channelId,
-            channelSecret,
             oauthRedirectURL,
 
         // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
@@ -20,9 +19,8 @@ angular.module('openline', [])
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
             loginSucceeded;
 
-        function init(channelId, channelSecret, store) {
-            channelId = channelId;
-            channelSecret = channelSecret;
+        function init(configChannelId, store) {
+            channelId = configChannelId;
             if (store) tokenStore = store;
         }
 
@@ -193,7 +191,7 @@ angular.module('openline', [])
                 params: {
                     grant_type: 'authorization_code',
                     client_id: channelId,
-                    client_secret: channelSecret,
+                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
                     code: authorizationCode,
                     redirect_uri: CALLBACK_URL
                 }
