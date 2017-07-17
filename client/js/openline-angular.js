@@ -77,7 +77,7 @@ angular.module('openline', [])
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
-            loginWindow.addEventListener('loadstart', loginWindowLoadStart);
+            //loginWindow.addEventListener('loadstart', loginWindowLoadStart);
             //loginWindow.addEventListener('exit', loginWindowExit);
             //}
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
