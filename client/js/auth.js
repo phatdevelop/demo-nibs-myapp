@@ -188,33 +188,35 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
         };
 
         $scope.lineLogin = function() {
-            console.log(OpenLINE)
-            OpenLINE.login()
-                .then(function(err, data) {
-                    console.log('err: ' + err);
-                    console.log('data: ' + data);
-                    // OpenLINE.get('/me', {fields: 'id'})
-                    //     .success(function(lineUser) {
-                    //         console.log('aaaaaaaalineUser: ' + lineUser);
-                    //         Auth.linelogin(lineUser)
-                    //             .success(function(data) {
-                    //                 $state.go("app.profile");
-                    //                 setTimeout(function() {
-                    //                     $ionicViewService.clearHistory();
-                    //                 })
-                    //             })
-                    //             .error(function(err) {
-                    //                 console.log(JSON.stringify(err));
-                    //                 $ionicPopup.alert({title: 'Oops', content: err});
-                    //             });
-                    //     })
-                    //     .error(function() {
-                    //         $ionicPopup.alert({title: 'Oops', content: 'The Line login failed 111111111'});
-                    //     });
-                },
-                function () {
-                    $ionicPopup.alert({title: 'Oops', content: "The Line login failed 2222222222222"});
-                });
+            console.log(OpenLINE);
+            // OpenLINE.login()
+            //     .then(function(err, data) {
+            //         OpenLINE.get('/me', {fields: 'id'})
+            //             .success(function(lineUser) {
+            //                 console.log('aaaaaaaalineUser: ' + lineUser);
+            //                 Auth.linelogin(lineUser)
+            //                     .success(function(data) {
+            //                         $state.go("app.profile");
+            //                         setTimeout(function() {
+            //                             $ionicViewService.clearHistory();
+            //                         })
+            //                     })
+            //                     .error(function(err) {
+            //                         console.log(JSON.stringify(err));
+            //                         $ionicPopup.alert({title: 'Oops', content: err});
+            //                     });
+            //             })
+            //             .error(function() {
+            //                 $ionicPopup.alert({title: 'Oops', content: 'The Line login failed 111111111'});
+            //             });
+            //     },
+            //     function () {
+            //         $ionicPopup.alert({title: 'Oops', content: "The Line login failed 2222222222222"});
+            //     });
+            OpenLINE.login(function(err, data) {
+                console.log('err: ' + err);
+                console.log('data: ' + data);
+            })
         };
     })
 
