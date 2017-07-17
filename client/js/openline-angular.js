@@ -16,16 +16,8 @@ angular.module('openline', [])
         // inside the module instead of keeping them local within the login function.
             deferredLogin,
 
-        // Indicates if the app is running inside Cordova
-            runningInCordova,
-
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
             loginSucceeded;
-
-        // document.addEventListener("deviceready", function () {
-        //     runningInCordova = true;
-        //     oauthRedirectURL = 'https://www.facebook.com/connect/login_success.html';
-        // }, false);
 
         function init(appId, store) {
             lineAppId = appId;
@@ -36,7 +28,6 @@ angular.module('openline', [])
 
             var loginWindow;
 
-            //var startTime = new Date().getTime();
             function loginWindowLoadStart(event) {
                 var url = event.url;
                 window.open(url, '_blank');
@@ -55,24 +46,13 @@ angular.module('openline', [])
                 loginWindow = null;
             }
 
-            // if (!lineAppId) {
-            //     return error({error: 'Line App Id not set.'});
-            // }
-
-            //lineScope = lineScope || '';
+            if (!lineAppId) {
+                return error({error: 'Line App Id not set.'});
+            }
 
             deferredLogin = $q.defer();
 
             loginSucceeded = false;
-
-            // if (runningInCordova) {
-            //     oauthRedirectURL =  'https://www.facebook.com/connect/login_success.html';
-            // } else {
-            //     var context = window.location.pathname.substring(0, window.location.pathname.indexOf("/",2)),
-            //         baseURL = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + context;
-            //     oauthRedirectURL = baseURL + '/oauthcallback.html';
-            // }
-            
             loginWindow = $window.open(LOGIN_URL + '?client_id=' + lineAppId + '&redirect_uri=' + CALLBACK_URL + '&state=123abc' +
                 '&response_type=code&display=popup', '_blank', 'location=no');
 
@@ -205,9 +185,7 @@ angular.module('openline', [])
                 method: 'POST',
                 url: 'https://api.line.me/v2/oauth/accessToken',
                 headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            "Access-Control-Allow-Origin": "*",
-                            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"},
+                    'Content-Type': 'application/x-www-form-urlencoded'},
                 params: {
                     grant_type: 'authorization_code',
                     client_id: lineAppId,
