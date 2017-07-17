@@ -214,12 +214,12 @@ angular.module('openline', [])
         return {
             init: init,
             login: login,
-            logout: logout,
-            revokePermissions: revokePermissions,
-            api: api,
-            post: post,
-            get: get,
-            isLoggedIn: isLoggedIn,
+            // logout: logout,
+            // revokePermissions: revokePermissions,
+            // api: api,
+            // post: post,
+            // get: get,
+            // isLoggedIn: isLoggedIn,
             oauthCallback: oauthCallback
         }
 
