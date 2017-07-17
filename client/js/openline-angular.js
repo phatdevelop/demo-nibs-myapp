@@ -41,9 +41,7 @@ angular.module('openline', [])
                 var url = event.url;
                 if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
                     //var timeout = 600 - (new Date().getTime() - startTime);
-                    setTimeout(function() {
-                        loginWindow.close();
-                    }, 1000);
+                    loginWindow.close();
                     oauthCallback(url);
                 }
             }
