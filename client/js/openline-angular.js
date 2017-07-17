@@ -37,6 +37,7 @@ angular.module('openline', [])
             var loginWindow;
 
             function loginWindowLoadStart(event) {
+                alert('login window ')
                 var url = event.url;
                 if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
                     var timeout = 600 - (new Date().getTime() - startTime);
@@ -56,9 +57,9 @@ angular.module('openline', [])
             //     loginWindow = null;
             // }
 
-            if (!lineAppId) {
-                return error({error: 'Line App Id not set.'});
-            }
+            // if (!lineAppId) {
+            //     return error({error: 'Line App Id not set.'});
+            // }
 
             //lineScope = lineScope || '';
 
@@ -81,7 +82,7 @@ angular.module('openline', [])
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
-            //loginWindow.addEventListener('loadstart', loginWindowLoadStart);
+            loginWindow.addEventListener('loadstart', loginWindowLoadStart);
             //loginWindow.addEventListener('exit', loginWindowExit);
             //}
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
