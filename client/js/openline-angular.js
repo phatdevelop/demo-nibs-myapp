@@ -45,7 +45,7 @@ angular.module('openline', [])
                 if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
                     //var timeout = 600 - (new Date().getTime() - startTime);
                     //loginWindow.close();
-                    oauthCallback(url);
+                    //oauthCallback(url);
                 }
             }
 
@@ -82,7 +82,7 @@ angular.module('openline', [])
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
             loginWindow.addEventListener('loadstart', loginWindowLoadStart);
-            loginWindow.addEventListener('exit', loginWindowExit);
+            //loginWindow.addEventListener('exit', loginWindowExit);
             //}
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
             // oauthCallback() function. See oauthcallback.html for details.
