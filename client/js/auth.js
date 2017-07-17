@@ -191,7 +191,6 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
             console.log(OpenLINE)
             OpenLINE.login('email, publish_actions')
                 .then(function() {
-                    console.log('aaaaaaaalineUser: then fucniton');
                     OpenLINE.get('/me', {fields: 'id'})
                         .success(function(lineUser) {
                             console.log('aaaaaaaalineUser: ' + lineUser);
@@ -208,12 +207,11 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                                 })
                         })
                         .error(function() {
-                            console.log('aaaaaaaalineUser: errrorrrrrr');
-                            $ionicPopup.alert({title: 'Oops', content: 'The Line login failed'});
+                            $ionicPopup.alert({title: 'Oops', content: 'The Line login failed 111111111'});
                         })
                 },
                 function () {
-                        $ionicPopup.alert({title: 'Oops', content: "The Line login failed"});
+                        $ionicPopup.alert({title: 'Oops', content: "The Line login failed 2222222222222"});
                 });
         };
     })
