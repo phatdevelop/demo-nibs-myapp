@@ -210,10 +210,10 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                             $ionicPopup.alert({title: 'Oops', content: 'The Line login failed 111111111'});
                         })
                 }
-                // ,
-                // function () {
-                //     $ionicPopup.alert({title: 'Oops', content: "The Line login failed 2222222222222"});
-                // }
+                ,
+                function () {
+                    $ionicPopup.alert({title: 'Oops', content: "The Line login failed 2222222222222"});
+                }
                 );
         };
     })

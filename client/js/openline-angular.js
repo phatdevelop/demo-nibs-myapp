@@ -20,7 +20,7 @@ angular.module('openline', [])
             runningInCordova,
 
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
-            loginProcessed;
+            loginSucceeded;
 
         // document.addEventListener("deviceready", function () {
         //     runningInCordova = true;
@@ -37,13 +37,12 @@ angular.module('openline', [])
             var loginWindow;
 
             function loginWindowLoadStart(event) {
-                alert('login window ')
                 var url = event.url;
-                if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
+                if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
                     var timeout = 600 - (new Date().getTime() - startTime);
                     setTimeout(function() {
                         loginWindow.close();
-                    }, timeout>0 ? timeout : 0);
+                    }, timeout > 0 ? timeout : 0);
                     oauthCallback(url);
                 }
             }
@@ -65,7 +64,7 @@ angular.module('openline', [])
 
             deferredLogin = $q.defer();
 
-            loginProcessed = false;
+            loginSucceeded = false;
 
             // if (runningInCordova) {
             //     oauthRedirectURL =  'https://www.facebook.com/connect/login_success.html';
@@ -119,11 +118,11 @@ angular.module('openline', [])
             // Parse the OAuth data received from Facebook
             var queryString, obj;
 
-            loginProcessed = true;
-            if (url.indexOf("access_token=") > 0) {
+            loginSucceeded = true;
+            if (url.indexOf("code=") > 0) {
                 queryString = url.substr(url.indexOf('#') + 1);
                 obj = parseQueryString(queryString);
-                tokenStore['linetoken'] = obj['access_token'];
+                tokenStore['linetoken'] = obj['code'];
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
                 queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
