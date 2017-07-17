@@ -204,11 +204,11 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                                 .error(function(err) {
                                     console.log(JSON.stringify(err));
                                     $ionicPopup.alert({title: 'Oops', content: err});
-                                })
+                                });
                         })
                         .error(function() {
                             $ionicPopup.alert({title: 'Oops', content: 'The Line login failed 111111111'});
-                        }
+                        });
                 },
                 function () {
                     $ionicPopup.alert({title: 'Oops', content: "The Line login failed 2222222222222"});

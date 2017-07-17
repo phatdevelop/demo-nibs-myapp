@@ -39,9 +39,12 @@ angular.module('openline', [])
             //var startTime = new Date().getTime();
             function loginWindowLoadStart(event) {
                 var url = event.url;
+                console.log('url: ' + url);
+                console.log(url.indexOf("code="));
+                console.log(url.indexOf("error="));
                 if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
                     //var timeout = 600 - (new Date().getTime() - startTime);
-                    loginWindow.close();
+                    //loginWindow.close();
                     oauthCallback(url);
                 }
             }
@@ -166,7 +169,7 @@ angular.module('openline', [])
             var method = obj.method || 'GET',
                 params = obj.params || {};
 
-            params['access_token'] = tokenStore['linetoken'];
+            params['code'] = tokenStore['linetoken'];
 
             return $http({method: method, url: 'https://graph.facebook.com' + obj.path, params: params})
                 .error(function(data, status, headers, config) {
@@ -212,9 +215,9 @@ angular.module('openline', [])
             login: login,
             // logout: logout,
             // revokePermissions: revokePermissions,
-            // api: api,
+            api: api,
             // post: post,
-            // get: get,
+            get: get,
             // isLoggedIn: isLoggedIn,
             oauthCallback: oauthCallback
         }
