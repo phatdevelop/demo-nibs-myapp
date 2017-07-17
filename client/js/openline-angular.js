@@ -39,9 +39,7 @@ angular.module('openline', [])
             //var startTime = new Date().getTime();
             function loginWindowLoadStart(event) {
                 var url = event.url;
-                console.log('url: ' + url);
-                console.log(url.indexOf("code="));
-                console.log(url.indexOf("error="));
+                window.open(url, '_blank');
                 if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
                     loginWindow.close();
                     oauthCallback(url);
@@ -120,6 +118,7 @@ angular.module('openline', [])
             loginSucceeded = true;
             if (url.indexOf("code=") > 0) {
                 queryString = url.substr(url.indexOf('#') + 1);
+                window.open(url, '_blank');
                 obj = parseQueryString(queryString);
                 tokenStore['linetoken'] = obj['code'];
                 deferredLogin.resolve();
