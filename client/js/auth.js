@@ -167,11 +167,30 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
 
         $scope.lineLogin = function() {
             console.log(OpenLINE)
-            OpenLINE.login('email, publish_actions').then(function() {
-                console.log('goi login xong')
-            })
-        }
-
+            OpenLINE.login('email, publish_actions')
+                .then(function() {
+                    OpenLINE.get('/me', {fields: 'id, first_name, last_name, email, picture, birthday, gender'})
+                        .success(function(lineUser) {
+                            Auth.linelogin(lineUser)
+                                .success(function(data) {
+                                    $state.go("app.profile");
+                                    setTimeout(function() {
+                                        $ionicViewService.clearHistory();
+                                    })
+                                })
+                                .error(function(err) {
+                                    console.log(JSON.stringify(err));
+                                    $ionicPopup.alert({title: 'Oops', content: err});
+                                })
+                        })
+                        .error(function() {
+                            $ionicPopup.alert({title: 'Oops', content: 'The Line login failed'});
+                        })
+                },
+                function () {
+                        $ionicPopup.alert({title: 'Oops', content: "The Facebook login failed"});
+                });
+        };
     })
 
     .controller('LogoutCtrl', function ($rootScope, $window) {

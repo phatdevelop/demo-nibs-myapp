@@ -47,24 +47,24 @@ angular.module('openline', [])
                 }
             }
 
-            // function loginWindowExit() {
-            //     console.log('exit and remove listeners');
-            //     // Handle the situation where the user closes the login window manually before completing the login process
-            //     deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
-            //     loginWindow.removeEventListener('loadstop', loginWindowLoadStart);
-            //     loginWindow.removeEventListener('exit', loginWindowExit);
-            //     loginWindow = null;
-            // }
+            function loginWindowExit() {
+                console.log('exit and remove listeners');
+                // Handle the situation where the user closes the login window manually before completing the login process
+                deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
+                loginWindow.removeEventListener('loadstop', loginWindowLoadStart);
+                loginWindow.removeEventListener('exit', loginWindowExit);
+                loginWindow = null;
+            }
 
-            // if (!fbAppId) {
-            //     return error({error: 'Facebook App Id not set.'});
-            // }
+            if (!lineAppId) {
+                return error({error: 'Line App Id not set.'});
+            }
 
-            //fbScope = fbScope || '';
+            lineScope = lineScope || '';
 
             deferredLogin = $q.defer();
 
-            // loginProcessed = false;
+            loginProcessed = false;
 
             // if (runningInCordova) {
             //     oauthRedirectURL =  'https://www.facebook.com/connect/login_success.html';
@@ -81,14 +81,13 @@ angular.module('openline', [])
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
-                loginWindow.addEventListener('loadstart', loginWindowLoadStart);
-            //    loginWindow.addEventListener('exit', loginWindowExit);
+            loginWindow.addEventListener('loadstart', loginWindowLoadStart);
+            loginWindow.addEventListener('exit', loginWindowExit);
             //}
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
             // oauthCallback() function. See oauthcallback.html for details.
 
             return deferredLogin.promise;
-
         }
 
         /**
@@ -123,7 +122,7 @@ angular.module('openline', [])
             if (url.indexOf("access_token=") > 0) {
                 queryString = url.substr(url.indexOf('#') + 1);
                 obj = parseQueryString(queryString);
-                tokenStore['fbtoken'] = obj['access_token'];
+                tokenStore['linetoken'] = obj['access_token'];
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
                 queryString = url.substring(url.indexOf('?') + 1, url.indexOf('#'));
@@ -142,7 +141,7 @@ angular.module('openline', [])
 //        }
 
         // function isLoggedIn() {
-        //     return tokenStore['fbtoken'] != null;
+        //     return tokenStore['linetoken'] != null;
         // }
 
         // /**
@@ -165,20 +164,20 @@ angular.module('openline', [])
         //  *  path:    path in the Facebook graph: /me, /me.friends, etc. - Required
         //  *  params:  queryString parameters as a map - Optional
         //  */
-        // function api(obj) {
+        function api(obj) {
 
-        //     var method = obj.method || 'GET',
-        //         params = obj.params || {};
+            var method = obj.method || 'GET',
+                params = obj.params || {};
 
-        //     params['access_token'] = tokenStore['fbtoken'];
+            params['access_token'] = tokenStore['fbtoken'];
 
-        //     return $http({method: method, url: 'https://graph.facebook.com' + obj.path, params: params})
-        //         .error(function(data, status, headers, config) {
-        //             if (data.error && data.error.type === 'OAuthException') {
-        //                 $rootScope.$emit('OAuthException');
-        //             }
-        //         });
-        // }
+            return $http({method: method, url: 'https://graph.facebook.com' + obj.path, params: params})
+                .error(function(data, status, headers, config) {
+                    if (data.error && data.error.type === 'OAuthException') {
+                        $rootScope.$emit('OAuthException');
+                    }
+                });
+        }
 
         // /**
         //  * Helper function for a POST call into the Graph API
@@ -196,9 +195,9 @@ angular.module('openline', [])
         //  * @param params
         //  * @returns {*}
         //  */
-        // function get(path, params) {
-        //     return api({method: 'GET', path: path, params: params});
-        // }
+        function get(path, params) {
+            return api({method: 'GET', path: path, params: params});
+        }
 
         // function parseQueryString(queryString) {
         //     var qs = decodeURIComponent(queryString),
