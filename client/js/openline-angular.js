@@ -32,7 +32,7 @@ angular.module('openline', [])
             if (store) tokenStore = store;
         }
 
-        function login(lineScope) {
+        function login() {
 
             var loginWindow;
 
