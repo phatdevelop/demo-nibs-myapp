@@ -77,7 +77,7 @@ angular.module('openline', [])
 
             var startTime = new Date().getTime();
             loginWindow = $window.open(LINE_LOGIN_URL + '?client_id=' + lineAppId + '&redirect_uri=' + LINE_CALLBACK_URL + '&state=123abc' +
-                '&response_type=token&display=popup&scope=' + lineScope, '_blank', 'location=no');
+                '&response_type=token');
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
