@@ -190,7 +190,8 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
         $scope.lineLogin = function() {
             console.log(OpenLINE)
             OpenLINE.login('email, publish_actions')
-                .then(function() {
+                .success(function(data) {
+                    console.log('data ne: ' + data);
                     OpenLINE.get('/me', {fields: 'id'})
                         .success(function(lineUser) {
                             console.log('aaaaaaaalineUser: ' + lineUser);

@@ -38,13 +38,13 @@ angular.module('openline', [])
 
             function loginWindowLoadStart(event) {
                 var url = event.url;
-                if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
-                    var timeout = 600 - (new Date().getTime() - startTime);
-                    setTimeout(function() {
-                        loginWindow.close();
-                    }, timeout>0 ? timeout : 0);
-                    oauthCallback(url);
-                }
+                // if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
+                //     var timeout = 600 - (new Date().getTime() - startTime);
+                //     setTimeout(function() {
+                //         loginWindow.close();
+                //     }, timeout>0 ? timeout : 0);
+                //     oauthCallback(url);
+                // }
             }
 
             // function loginWindowExit() {
@@ -60,7 +60,7 @@ angular.module('openline', [])
                 return error({error: 'Line App Id not set.'});
             }
 
-            lineScope = lineScope || '';
+            //lineScope = lineScope || '';
 
             deferredLogin = $q.defer();
 
@@ -77,7 +77,7 @@ angular.module('openline', [])
 
             var startTime = new Date().getTime();
             loginWindow = $window.open(LINE_LOGIN_URL + '?client_id=' + lineAppId + '&redirect_uri=' + LINE_CALLBACK_URL + '&state=123abc' +
-                '&response_type=token&display=popup', '_blank', 'location=no');
+                '&response_type=code&display=popup', '_blank', 'location=no');
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
