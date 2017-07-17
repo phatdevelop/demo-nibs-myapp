@@ -47,14 +47,14 @@ angular.module('openline', [])
                 }
             }
 
-            function loginWindowExit() {
-                console.log('exit and remove listeners');
-                // Handle the situation where the user closes the login window manually before completing the login process
-                deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
-                loginWindow.removeEventListener('loadstop', loginWindowLoadStart);
-                loginWindow.removeEventListener('exit', loginWindowExit);
-                loginWindow = null;
-            }
+            // function loginWindowExit() {
+            //     console.log('exit and remove listeners');
+            //     // Handle the situation where the user closes the login window manually before completing the login process
+            //     deferredLogin.reject({error: 'user_cancelled', error_description: 'User cancelled login process', error_reason: "user_cancelled"});
+            //     loginWindow.removeEventListener('loadstop', loginWindowLoadStart);
+            //     loginWindow.removeEventListener('exit', loginWindowExit);
+            //     loginWindow = null;
+            // }
 
             if (!lineAppId) {
                 return error({error: 'Line App Id not set.'});
@@ -82,7 +82,7 @@ angular.module('openline', [])
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
             loginWindow.addEventListener('loadstart', loginWindowLoadStart);
-            loginWindow.addEventListener('exit', loginWindowExit);
+            //loginWindow.addEventListener('exit', loginWindowExit);
             //}
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
             // oauthCallback() function. See oauthcallback.html for details.
