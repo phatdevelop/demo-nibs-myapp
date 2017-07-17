@@ -64,7 +64,8 @@ angular.module('openline', [])
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
             // oauthCallback() function. See oauthcallback.html for details.
 
-            return deferredLogin.promise;
+            //return deferredLogin.promise;
+            return tokenStore['linetoken'];
         }
 
         /**
