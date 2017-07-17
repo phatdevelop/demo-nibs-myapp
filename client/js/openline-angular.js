@@ -48,9 +48,9 @@ angular.module('openline', [])
                 loginWindow = null;
             }
 
-            // if (!channelId) {
-            //     return error({error: 'Line Channel Id not set.'});
-            // }
+            if (!channelId) {
+                return error({error: 'Line App Id not set.'});
+            }
 
             deferredLogin = $q.defer();
 
@@ -93,6 +93,7 @@ angular.module('openline', [])
          * OAuth workflow.
          */
         function oauthCallback(url) {
+
             // Parse the OAuth data received from Facebook
             var queryString, obj;
 
@@ -144,8 +145,10 @@ angular.module('openline', [])
         //  *  params:  queryString parameters as a map - Optional
         //  */
         function api(obj) {
+
             var method = obj.method || 'GET',
                 params = obj.params || {};
+
             //params['code'] = tokenStore['linetoken'];
 
             return $http({
