@@ -192,7 +192,7 @@ angular.module('openline', [])
                     grant_type: 'authorization_code',
                     client_id: channelId,
                     client_secret: '59887b50400fcd8bd40359b9045ce39b',
-                    code: authorizationCode,
+                    code: 'iYG029izOHJQo6l661Sv',
                     redirect_uri: CALLBACK_URL
                 }
             })
