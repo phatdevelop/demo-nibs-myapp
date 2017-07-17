@@ -257,17 +257,17 @@ angular.module('openfb', [])
             return obj;
         }
 
-        // return {
-        //     init: init,
-        //     login: login,
-        //     logout: logout,
-        //     revokePermissions: revokePermissions,
-        //     api: api,
-        //     post: post,
-        //     get: get,
-        //     isLoggedIn: isLoggedIn,
-        //     oauthCallback: oauthCallback
-        // }
+        return {
+            init: init,
+            login: login,
+            logout: logout,
+            revokePermissions: revokePermissions,
+            api: api,
+            post: post,
+            get: get,
+            isLoggedIn: isLoggedIn,
+            oauthCallback: oauthCallback
+        }
 
     });
 
