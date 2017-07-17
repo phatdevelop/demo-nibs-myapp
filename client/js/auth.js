@@ -90,28 +90,28 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
 
                     });
             },
-            // linelogin: function(lineUser) {
-            //     console.log(JSON.stringify(lineUser));
-            //     return $http.post($rootScope.server.url + '/linelogin', {user: lineUser, token: $window.localStorage['linetoken']})
-            //         .success(function(data) {
-            //             $rootScope.user = data.user;
-            //             $window.localStorage.user = JSON.stringify(data.user);
-            //             $window.localStorage.token = data.token;
+            linelogin: function(lineUser) {
+                console.log(JSON.stringify(lineUser));
+                return $http.post($rootScope.server.url + '/linelogin', {user: lineUser, token: $window.localStorage['linetoken']})
+                    .success(function(data) {
+                        $rootScope.user = data.user;
+                        $window.localStorage.user = JSON.stringify(data.user);
+                        $window.localStorage.token = data.token;
 
-            //             console.log('Subscribing for Push as ' + data.user.email);
-            //             if (typeof(ETPush) != 'undefined') {
-            //                 ETPush.setSubscriberKey(
-            //                     function() {
-            //                         console.log('setSubscriberKey: success');
-            //                     },
-            //                     function(error) {
-            //                         alert('Error setting Push Notification subscriber');
-            //                     },
-            //                     data.user.email
-            //                 );
-            //             }
-            //         });
-            // },
+                        console.log('Subscribing for Push as ' + data.user.email);
+                        if (typeof(ETPush) != 'undefined') {
+                            ETPush.setSubscriberKey(
+                                function() {
+                                    console.log('setSubscriberKey: success');
+                                },
+                                function(error) {
+                                    alert('Error setting Push Notification subscriber');
+                                },
+                                data.user.email
+                            );
+                        }
+                    });
+            },
             logout: function () {
                 $rootScope.user = undefined;
                 var promise = $http.post($rootScope.server.url + '/logout');
