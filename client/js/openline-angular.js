@@ -38,13 +38,13 @@ angular.module('openline', [])
 
             function loginWindowLoadStart(event) {
                 var url = event.url;
-                // if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
-                //     var timeout = 600 - (new Date().getTime() - startTime);
-                //     setTimeout(function() {
-                //         loginWindow.close();
-                //     }, timeout>0 ? timeout : 0);
-                //     oauthCallback(url);
-                // }
+                if (url.indexOf("access_token=") > 0 || url.indexOf("error=") > 0) {
+                    var timeout = 600 - (new Date().getTime() - startTime);
+                    setTimeout(function() {
+                        loginWindow.close();
+                    }, timeout>0 ? timeout : 0);
+                    oauthCallback(url);
+                }
             }
 
             // function loginWindowExit() {
@@ -81,7 +81,7 @@ angular.module('openline', [])
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
-            loginWindow.addEventListener('loadstart', loginWindowLoadStart);
+            //loginWindow.addEventListener('loadstart', loginWindowLoadStart);
             //loginWindow.addEventListener('exit', loginWindowExit);
             //}
             // Note: if the app is running in the browser the loginWindow dialog will call back by invoking the
