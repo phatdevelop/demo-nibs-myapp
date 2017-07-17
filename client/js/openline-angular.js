@@ -204,7 +204,7 @@ angular.module('openline', [])
             return $http({
                 method: 'POST',
                 url: 'https://api.line.me/v2/oauth/accessToken',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin' : '*'},
                 params: {
                     grant_type: 'authorization_code',
                     client_id: lineAppId,
