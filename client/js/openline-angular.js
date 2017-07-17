@@ -234,6 +234,7 @@ angular.module('openline', [])
             api: api,
             // post: post,
             get: get,
+            getAccessToken: getAccessToken,
             // isLoggedIn: isLoggedIn,
             oauthCallback: oauthCallback
         }
