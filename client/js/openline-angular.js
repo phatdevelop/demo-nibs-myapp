@@ -42,11 +42,10 @@ angular.module('openline', [])
                 console.log('url: ' + url);
                 console.log(url.indexOf("code="));
                 console.log(url.indexOf("error="));
-                if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
-                    //var timeout = 600 - (new Date().getTime() - startTime);
-                    //loginWindow.close();
-                    //oauthCallback(url);
-                }
+                // if (url.indexOf("code=") > 0 || url.indexOf("error=") > 0) {
+                //     loginWindow.close();
+                //     oauthCallback(url);
+                // }
             }
 
             function loginWindowExit() {
