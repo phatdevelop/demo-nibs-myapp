@@ -169,7 +169,7 @@ angular.module('openline', [])
             var method = obj.method || 'GET',
                 params = obj.params || {};
 
-            params['access_token'] = tokenStore['fbtoken'];
+            params['access_token'] = tokenStore['linetoken'];
 
             return $http({method: method, url: 'https://graph.facebook.com' + obj.path, params: params})
                 .error(function(data, status, headers, config) {
