@@ -207,6 +207,8 @@ angular.module('openline', [])
                 headers: {
                             'Content-Type': 'application/x-www-form-urlencoded', 
                             'Access-Control-Allow-Origin': '*',
+                            'Access-Control-Allow-Credentials': 'true',
+                            'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
                             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization'},
                 params: {
                     grant_type: 'authorization_code',
