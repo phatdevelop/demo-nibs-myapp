@@ -267,7 +267,7 @@ angular.module('openline', [])
 
             // return xhr.send();
 
-            var url = 'https://html5rocks-cors.s3-website-us-east-1.amazonaws.com/index.html';
+            var url = 'https://api.line.me/v2/oauth/accessToken';
 
               var xhr = createCORSRequest('GET', url);
               if (!xhr) {
