@@ -136,50 +136,22 @@ angular.module('openline', [])
         //         });
         // }
 
-        // /**
-        //  * Lets you make any Facebook Graph API request.
-        //  * @param obj - Request configuration object. Can include:
-        //  *  method:  HTTP method: GET, POST, etc. Optional - Default is 'GET'
-        //  *  path:    path in the Facebook graph: /me, /me.friends, etc. - Required
-        //  *  params:  queryString parameters as a map - Optional
-        //  */
-        function api(obj) {
-
-            var method = obj.method || 'GET',
-                params = obj.params || {};
-
-            //params['code'] = tokenStore['linetoken'];
+        function getUserProfile(data) {
+            var scope = data.scope;
+            var access_token = data.access_token;
+            var token_type = data.token_type;
+            var expires_in = data.expires_in;
+            var refresh_token = data.refresh_token;
 
             return $http({
-                            method: method, 
-                            url: 'https://api.line.me/v2/profile' + obj.path, 
-                            headers: 'Authorization: Bearer ' + params['code'],
-                            params: params})
-                .error(function(data, status, headers, config) {
-                    if (data.error && data.error.type === 'OAuthException') {
-                        $rootScope.$emit('OAuthException');
-                    }
-                });
-        }
-
-        // /**
-        //  * Helper function for a POST call into the Graph API
-        //  * @param path
-        //  * @param params
-        //  * @returns {*}
-        //  */
-        // function post(path, params) {
-        //     return api({method: 'POST', path: path, params: params});
-        // }
-
-        // /**
-        //  * Helper function for a GET call into the Graph API
-        //  * @param path
-        //  * @param params
-        //  * @returns {*}
-        //  */
-        function get(path, params) {
-            return api({method: 'GET', path: path, params: params});
+                method: 'GET',
+                url: 'https://api.line.me/v2/profile' + obj.path, 
+                headers: 'Authorization': 'Bearer ' + access_token})
+            .error(function(data, status, headers, config) {
+                if (data.error && data.error.type === 'OAuthException') {
+                    $rootScope.$emit('OAuthException');
+                }
+            });
         }
 
         function getAccessToken() {
