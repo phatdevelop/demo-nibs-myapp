@@ -130,48 +130,48 @@ angular.module('openline', [])
         // }
 
         function getAccessToken() {
-            return $http({
-                method: 'POST',
-                url: 'https://api.line.me/v2/oauth/accessToken',
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                params: {
-                    grant_type: 'authorization_code',
-                    client_id: channelId,
-                    client_secret: channelSecret,
-                    code: authorizationCode,
-                    redirect_uri: callbackURL
-                }
-            });
+            // return $http({
+            //     method: 'POST',
+            //     url: 'https://api.line.me/v2/oauth/accessToken',
+            //     headers: {
+            //         "Content-Type": "application/x-www-form-urlencoded"
+            //     },
+            //     params: {
+            //         grant_type: 'authorization_code',
+            //         client_id: channelId,
+            //         client_secret: channelSecret,
+            //         code: authorizationCode,
+            //         redirect_uri: callbackURL
+            //     }
+            // });
 
 
-            // var url = 'https://api.line.me/v2/oauth/accessToken';
+            var url = 'https://api.line.me/v2/oauth/accessToken';
 
-            //   var xhr = createCORSRequest('POST', url);
-            //   if (!xhr) {
-            //     alert('CORS not supported');
-            //     return;
-            //   }
-            //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            //   xhr.onload = function() {
-            //     var text = xhr.responseText;
-            //     alert('Response from CORS request to ' + url + ': ' + title);
-            //   };
+              var xhr = createCORSRequest('POST', url);
+              if (!xhr) {
+                alert('CORS not supported');
+                return;
+              }
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhr.onload = function() {
+                var text = xhr.responseText;
+                alert('Response from CORS request to ' + url);
+              };
 
-            //   xhr.onerror = function() {
-            //     alert('Woops, there was an error making the request.');
-            //   };
-            //   var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=" + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
-            //   xhr.send(params);
+              xhr.onerror = function() {
+                alert('Woops, there was an error making the request.');
+              };
+              var params = 'grant_type=authorization_code&client_id=' + channelId + '&client_secret=' + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
+              xhr.send(params);
         }
 
         function getUserProfile(data) {
-            var scope = data.scope;
+            //var scope = data.scope;
             var access_token = data.access_token;
-            var token_type = data.token_type;
-            var expires_in = data.expires_in;
-            var refresh_token = data.refresh_token;
+            //var token_type = data.token_type;
+            //var expires_in = data.expires_in;
+            //var refresh_token = data.refresh_token;
             $window.sessionStorage.token = access_token;
             
             return $http({
