@@ -94,7 +94,7 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                 console.log(JSON.stringify(lineUser));
                 console.log('token: ' + $window.sessionStorage.token);
 
-                return $http.post($rootScope.server.url + '/linelogin/' + lineUser.userId + '/' + 'token')
+                return $http.post($rootScope.server.url + '/linelogin/#/app/' + lineUser.userId + '/' + 'token')
                     .success(function(data) {
                         $rootScope.user = data.user;
                         $window.localStorage.user = JSON.stringify(data.user);
@@ -112,10 +112,6 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                                 data.user.email
                             );
                         }
-                    })
-                    .error(function(err) {
-                        alert('Error setting Push Notification subscriber: ' + error);
-                        $ionicPopup.alert({title: 'Oops', content: 'The Line login failed 999: ' + error});
                     });
             },
             logout: function () {
