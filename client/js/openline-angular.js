@@ -141,13 +141,13 @@ angular.module('openline', [])
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 params: {
-                    //grant_type: 'authorization_code',
-                    grant_type: 'client_credentials',
+                    grant_type: 'authorization_code',
                     client_id: channelId,
-                    client_secret: channelSecret
-                    //code: authorizationCode,
-                    //redirect_uri: callbackURL
-                }
+                    client_secret: channelSecret,
+                    code: authorizationCode,
+                    redirect_uri: callbackURL
+                },
+                useDefaultXhrHeader: 'false'
             });
 
             // var url = 'https://api.line.me/v2/oauth/accessToken';
