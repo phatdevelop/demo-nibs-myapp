@@ -156,6 +156,7 @@ angular.module('openline', [])
                 alert('onreadystatechange')
                   if (xhr.readyState == 4) {
                     // JSON.parse does not evaluate the attacker's scripts.
+                    alert('xhr.responseText: ' + xhr.responseText);
                     var resp = JSON.parse(xhr.responseText);
                     alert('resp' + resp);
                   }
