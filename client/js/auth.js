@@ -92,9 +92,9 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
             },
             linelogin: function(lineUser) {
                 console.log(JSON.stringify(lineUser));
-                console.log('$window.localStorage: ' + $window.localStorage);
-                console.log('linetoken: ' + $window.localStorage['linetoken']);
-                return $http.post($rootScope.server.url + '/linelogin', {user: lineUser, token: $window.localStorage['linetoken']})
+                console.log('token: ' + $window.sessionStorage.token);
+                
+                return $http.post($rootScope.server.url + '/linelogin', {user: lineUser, token: $window.sessionStorage.token})
                     .success(function(data) {
                         $rootScope.user = data.user;
                         $window.localStorage.user = JSON.stringify(data.user);
@@ -193,11 +193,8 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                 .then(function() {
                     OpenLINE.getAccessToken()
                         .success(function(data) {
-                            console.log('data: ' + data);
                             OpenLINE.getUserProfile(data)
                                 .success(function(lineUser) {
-                                    console.log('aaaaaaaalineUser: ' + lineUser);
-                                    console.log('$window.sessionStorage.token: ' + $window.sessionStorage.token);
                                     Auth.linelogin(lineUser)
                                         .success(function(data) {
                                             $state.go("app.profile");

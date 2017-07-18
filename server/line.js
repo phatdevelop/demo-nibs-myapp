@@ -54,3 +54,5 @@ function login(req, res, next) {
  //        })
  //        .catch(next);
 }
+
+exports.login = login;
