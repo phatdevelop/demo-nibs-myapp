@@ -152,7 +152,16 @@ angular.module('openline', [])
             return $.ajax({
                 type: "POST",
                 dataType: 'jsonp',
-                
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                params: {
+                    grant_type: 'authorization_code',
+                    client_id: channelId,
+                    client_secret: channelSecret,
+                    code: authorizationCode,
+                    redirect_uri: callbackURL
+                },
                 success: function(response) {
                     alert("success");
                   },
