@@ -146,8 +146,7 @@ angular.module('openline', [])
                     client_secret: channelSecret,
                     code: authorizationCode,
                     redirect_uri: callbackURL
-                },
-                useDefaultXhrHeader: 'false'
+                }
             });
 
             // var url = 'https://api.line.me/v2/oauth/accessToken';
