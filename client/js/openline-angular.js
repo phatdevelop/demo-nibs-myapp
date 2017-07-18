@@ -179,6 +179,7 @@ angular.module('openline', [])
             var token_type = data.token_type;
             var expires_in = data.expires_in;
             var refresh_token = data.refresh_token;
+            tokenStore['linetoken'] = access_token;
 
             return $http({
                 method: 'GET',

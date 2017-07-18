@@ -9,8 +9,6 @@ var app = angular.module('nibs', ['ionic', 'openfb', 'openline', 'nibs.config', 
         $rootScope.server = {url: SERVER_URL || location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '')};
 
         // Intialize OpenFB Facebook library
-        console.log(OpenFB)
-        console.log(OpenLINE)
         OpenFB.init(FB_APP_ID, $window.localStorage);
         OpenLINE.init(LINE_CHANNEL_ID, LINE_CHANNEL_SECRET, $window.localStorage);
         $ionicPlatform.ready(function() {
