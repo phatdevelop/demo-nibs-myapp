@@ -100,7 +100,6 @@ angular.module('openline', [])
             if (url.indexOf("code=") > 0) {
                 queryString = url.substr(url.indexOf('?') + 1);
                 obj = parseQueryString(queryString);
-                //tokenStore['code'] = obj['code'];
                 authorizationCode = obj['code'];
                 deferredLogin.resolve();
             } else if (url.indexOf("error=") > 0) {
