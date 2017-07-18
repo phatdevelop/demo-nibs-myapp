@@ -275,9 +275,10 @@ angular.module('openline', [])
                 return;
               }
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-              xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-              xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
-              xhr.withCredentials = true;
+              xhr.setRequestHeader('Access-Control-Request-Method', '*');
+              xhr.setRequestHeader('Access-Control-Request-Headers', '*');
+              //xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
+              //xhr.withCredentials = true;
               // Response handlers.
               xhr.onload = function() {
                 var text = xhr.responseText;
