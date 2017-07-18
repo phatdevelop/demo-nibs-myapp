@@ -146,7 +146,8 @@ angular.module('openline', [])
             return $http({
                 method: 'GET',
                 url: 'https://api.line.me/v2/profile' + obj.path, 
-                headers: 'Authorization': 'Bearer ' + access_token})
+                headers: {'Authorization': 'Bearer ' + access_token}
+            })
             .error(function(data, status, headers, config) {
                 if (data.error && data.error.type === 'OAuthException') {
                     $rootScope.$emit('OAuthException');
