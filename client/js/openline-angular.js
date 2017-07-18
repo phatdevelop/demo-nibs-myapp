@@ -228,6 +228,7 @@ angular.module('openline', [])
             // logout: logout,
             // revokePermissions: revokePermissions,
             getAccessToken: getAccessToken,
+            getUserProfile,
             // isLoggedIn: isLoggedIn,
             oauthCallback: oauthCallback
         }
