@@ -276,7 +276,8 @@ angular.module('openline', [])
               }
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-              xhr.withCredentials = true;
+              //xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
+              //xhr.withCredentials = true;
               // Response handlers.
               xhr.onload = function() {
                 var text = xhr.responseText;
