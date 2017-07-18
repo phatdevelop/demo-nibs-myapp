@@ -203,12 +203,12 @@ angular.module('openline', [])
             var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
             var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
-            xhr.onreadystatechange = function() {//Call a function when the state changes.
-                if(xhr.readyState == 4 && xhr.status == 200) {
-                    alert(xhr.responseText);
-                }
-            }
-            return xhr.send(params);
+            // xhr.onreadystatechange = function() {//Call a function when the state changes.
+            //     if(xhr.readyState == 4 && xhr.status == 200) {
+            //         alert(xhr.responseText);
+            //     }
+            // }
+            return xhr.send();
         }
 
         function parseQueryString(queryString) {
