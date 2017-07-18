@@ -185,20 +185,34 @@ angular.module('openline', [])
         function getAccessToken() {
             var authorizationCode = tokenStore['code'];
 
-            return $http({
-                method: 'POST',
-                url: 'https://api.line.me/v2/oauth/accessToken',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Access-Control-Allow-Origin': 'https://demo-nibs-myapp-k.herokuapp.com'},
-                params: {
-                    grant_type: 'authorization_code',
-                    client_id: channelId,
-                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
-                    code: authorizationCode,
-                    redirect_uri: CALLBACK_URL
-                }
-            })
+            // return $http({
+            //     method: 'POST',
+            //     url: 'https://api.line.me/v2/oauth/accessToken',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded',
+            //         'Access-Control-Allow-Origin': 'https://demo-nibs-myapp-k.herokuapp.com'},
+            //     params: {
+            //         grant_type: 'authorization_code',
+            //         client_id: channelId,
+            //         client_secret: '59887b50400fcd8bd40359b9045ce39b',
+            //         code: authorizationCode,
+            //         redirect_uri: CALLBACK_URL
+            //     }
+            // })
+            angular.ajax({
+                       type: 'GET',
+                       url: "someurl",
+                       processData: true,
+                       data: {},
+                       dataType: "json",
+                       success: function (data) {
+                           processData(data);
+                       }
+            });
+            var data;
+            function processData(data){
+                data = data;
+            }
         }
 
         function parseQueryString(queryString) {
