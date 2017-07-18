@@ -112,6 +112,8 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                                 data.user.email
                             );
                         }
+                    }).error(function(err) {
+                        console.log(JSON.stringify(err));
                     });
             },
             logout: function () {
