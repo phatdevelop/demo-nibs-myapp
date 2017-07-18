@@ -162,7 +162,6 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
         };
 
         $scope.facebookLogin = function () {
-            console.log(OpenFB)
             OpenFB.login('email, publish_actions').then(
                 function () {
                     OpenFB.get('/me', {fields: 'id,first_name,last_name,email,picture,birthday,gender'})
@@ -189,7 +188,6 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
         };
 
         $scope.lineLogin = function() {
-            console.log(OpenLINE);
             OpenLINE.login()
                 .then(function() {
                     OpenLINE.getAccessToken()
