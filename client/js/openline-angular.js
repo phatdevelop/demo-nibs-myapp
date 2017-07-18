@@ -155,7 +155,7 @@ angular.module('openline', [])
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
-                params: {
+                data: {
                     grant_type: 'authorization_code',
                     client_id: channelId,
                     client_secret: channelSecret,
