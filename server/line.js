@@ -71,7 +71,7 @@ function validateLINEToken(lineToken, lineUserId) {
         params: {
             access_token: lineToken
         }
-    }function(res) {
+    },function(res) {
     	var body = '';
 
     	res.on('end', function() {
