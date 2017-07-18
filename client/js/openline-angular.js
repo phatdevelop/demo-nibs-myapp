@@ -237,6 +237,14 @@ angular.module('openline', [])
             //     }
             // });
 
+            
+
+            var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
+            if (!xhr) {
+                alert('CORS not supported');
+                return;
+            }
+
             xhr.onload = function() {
              var responseText = xhr.responseText;
              console.log(responseText);
@@ -246,12 +254,6 @@ angular.module('openline', [])
             xhr.onerror = function() {
               console.log('There was an error!');
             };
-
-            var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
-            if (!xhr) {
-                alert('CORS not supported');
-                return;
-            }
 
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
             //xhr.withCredentials  = true;
