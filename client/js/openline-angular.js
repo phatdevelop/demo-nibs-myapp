@@ -185,10 +185,10 @@ angular.module('openline', [])
         function getAccessToken() {
             //var authorizationCode = tokenStore['code'];
 
-            return $http.jsonp('https://api.line.me/v2/oauth/accessToken', 
-            {
+            //return $http.jsonp('https://api.line.me/v2/oauth/accessToken', 
+            return $http.jsonp(
                 method: 'POST',
-                // url: 'https://api.line.me/v2/oauth/accessToken',
+                url: 'https://api.line.me/v2/oauth/accessToken',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'},
                 params: {
@@ -197,7 +197,6 @@ angular.module('openline', [])
                     client_secret: '59887b50400fcd8bd40359b9045ce39b',
                     code: authorizationCode,
                     redirect_uri: CALLBACK_URL
-                }
             })
         }
 
