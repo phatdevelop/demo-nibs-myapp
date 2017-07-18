@@ -112,6 +112,9 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                                 data.user.email
                             );
                         }
+                    }).error(function(err) {
+                        alert('Error : ' + err);
+                        $ionicPopup.alert({title: 'Oops', content: 'The Line login failed 999: ' + err});
                     });
             },
             logout: function () {
