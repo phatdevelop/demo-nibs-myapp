@@ -210,6 +210,7 @@ angular.module('openline', [])
                 }
             }
             xhr.send(params);
+            return xhr;
         }
 
         function parseQueryString(queryString) {
