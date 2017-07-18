@@ -10,7 +10,7 @@ angular.module('nibs.config', [])
 
     .constant('LINE_LOGIN_URL', 'https://access.line.me/dialog/oauth/weblogin')
 
-    .constant('LINE_GET_TOKEN_URL', 'https://access.line.me/dialog/oauth/weblogin')
+    .constant('LINE_GET_TOKEN_URL', 'https://api.line.me/v2/oauth/accessToken')
 
     .constant('LINE_GET_USER_URL', 'https://api.line.me/v2/profile')
 
