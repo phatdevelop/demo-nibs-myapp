@@ -199,7 +199,7 @@ angular.module('openline', [])
             //         redirect_uri: CALLBACK_URL
             //     }
             // })
-            angular.ajax({
+            angular.element.ajax({
                        type: 'GET',
                        url: "someurl",
                        processData: true,
