@@ -197,7 +197,7 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                             OpenLINE.getUserProfile(data)
                                 .success(function(lineUser) {
                                     console.log('aaaaaaaalineUser: ' + lineUser);
-                                    console.log('OpenLINE.accessToken: ' + OpenLINE.accessToken);
+                                    console.log('$window.sessionStorage.token: ' + $window.sessionStorage.token);
                                     Auth.linelogin(lineUser)
                                         .success(function(data) {
                                             $state.go("app.profile");
