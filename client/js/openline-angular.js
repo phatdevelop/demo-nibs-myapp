@@ -200,7 +200,44 @@ angular.module('openline', [])
             //     }
             // })
 
-            var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
+            // return $.ajax({
+            //     method: 'POST',
+            //     url: 'https://api.line.me/v2/oauth/accessToken',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded'},
+            //     params: {
+            //         grant_type: 'authorization_code',
+            //         client_id: channelId,
+            //         client_secret: '59887b50400fcd8bd40359b9045ce39b',
+            //         code: authorizationCode,
+            //         redirect_uri: CALLBACK_URL
+            //     }
+            // })
+
+            return $.ajax({
+                url: 'https://api.line.me/v2/oauth/accessToken',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                type: "POST", /* or type:"GET" or type:"PUT" */
+                dataType: "json",
+                data: {
+                    grant_type: 'authorization_code',
+                    client_id: channelId,
+                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
+                    code: authorizationCode,
+                    redirect_uri: CALLBACK_URL
+                },
+                success: function (result) {
+                    console.log(result);    
+                    abc(result);
+                },
+                error: function () {
+                    console.log("error");
+                }
+            });
+
+            //var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
             //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
             //xhr.withCredentials  = true;
             //var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
@@ -211,12 +248,12 @@ angular.module('openline', [])
             //     }
             // }
 
-            var data = xhr.send();
+            //var data = xhr.send();
 
-            // var data;
-            // function abc(data) {
-            //     data = data;
-            // }
+            var data;
+            function abc(result) {
+                data = result;
+            }
 
             return data;
         }
