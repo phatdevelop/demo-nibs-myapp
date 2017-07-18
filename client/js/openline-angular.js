@@ -136,27 +136,7 @@ angular.module('openline', [])
         //         });
         // }
 
-        function getUserProfile(data) {
-            var scope = data.scope;
-            var access_token = data.access_token;
-            var token_type = data.token_type;
-            var expires_in = data.expires_in;
-            var refresh_token = data.refresh_token;
-
-            return $http({
-                method: 'GET',
-                url: 'https://api.line.me/v2/profile' + obj.path, 
-                headers: {'Authorization': 'Bearer ' + access_token}
-            })
-            .error(function(data, status, headers, config) {
-                if (data.error && data.error.type === 'OAuthException') {
-                    $rootScope.$emit('OAuthException');
-                }
-            });
-        }
-
         function getAccessToken() {
-
             return $http({
                 method: 'POST',
                 url: 'https://api.line.me/v2/oauth/accessToken',
@@ -191,6 +171,25 @@ angular.module('openline', [])
             //   };
             //   var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
             //   xhr.send(params);
+        }
+
+        function getUserProfile(data) {
+            var scope = data.scope;
+            var access_token = data.access_token;
+            var token_type = data.token_type;
+            var expires_in = data.expires_in;
+            var refresh_token = data.refresh_token;
+
+            return $http({
+                method: 'GET',
+                url: 'https://api.line.me/v2/profile' + obj.path, 
+                headers: {'Authorization': 'Bearer ' + access_token}
+            })
+            .error(function(data, status, headers, config) {
+                if (data.error && data.error.type === 'OAuthException') {
+                    $rootScope.$emit('OAuthException');
+                }
+            });
         }
 
         function parseQueryString(queryString) {
@@ -228,9 +227,6 @@ angular.module('openline', [])
             login: login,
             // logout: logout,
             // revokePermissions: revokePermissions,
-            api: api,
-            // post: post,
-            get: get,
             getAccessToken: getAccessToken,
             // isLoggedIn: isLoggedIn,
             oauthCallback: oauthCallback
