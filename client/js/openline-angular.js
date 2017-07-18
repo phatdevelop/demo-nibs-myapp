@@ -1,18 +1,11 @@
 angular.module('openline', [])
 
     .factory('OpenLINE', function ($rootScope, $q, $window, $http) {
-
-        var LOGIN_URL = 'https://access.line.me/dialog/oauth/weblogin',
-
-            CALLBACK_URL = 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html',
-
-        // By default we store fbtoken in sessionStorage. This can be overriden in init()
-            tokenStore = window.sessionStorage,
-
-            channelId,
-            oauthRedirectURL,
+        var channelId,
+            channelSecret,
+            loginURL,
+            callbackURL,
             authorizationCode,
-
         // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
         // inside the module instead of keeping them local within the login function.
             deferredLogin,
@@ -20,13 +13,14 @@ angular.module('openline', [])
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
             loginSucceeded;
 
-        function init(configChannelId, store) {
+        function init(configChannelId, configChannelSecret, configLoginURL, configCallbackURL) {
             channelId = configChannelId;
-            if (store) tokenStore = store;
+            channelSecret = configChannelSecret;
+            loginURL = configLoginURL;
+            callbackURL = configCallbackURL;
         }
 
         function login() {
-
             var loginWindow;
 
             function loginWindowLoadStart(event) {
@@ -54,7 +48,7 @@ angular.module('openline', [])
             deferredLogin = $q.defer();
 
             loginSucceeded = false;
-            loginWindow = $window.open(LOGIN_URL + '?client_id=' + channelId + '&redirect_uri=' + CALLBACK_URL + '&state=123abc' +
+            loginWindow = $window.open(loginURL + '?client_id=' + channelId + '&redirect_uri=' + callbackURL + '&state=123abc' +
                 '&response_type=code&display=popup', '_blank', 'location=no');
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
@@ -145,9 +139,9 @@ angular.module('openline', [])
                 params: {
                     grant_type: 'authorization_code',
                     client_id: channelId,
-                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
+                    client_secret: channelSecret,
                     code: authorizationCode,
-                    redirect_uri: CALLBACK_URL
+                    redirect_uri: callbackURL
                 }
             });
 
@@ -168,7 +162,7 @@ angular.module('openline', [])
             //   xhr.onerror = function() {
             //     alert('Woops, there was an error making the request.');
             //   };
-            //   var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
+            //   var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=" + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
             //   xhr.send(params);
         }
 

@@ -1,6 +1,6 @@
 var app = angular.module('nibs', ['ionic', 'openfb', 'openline', 'nibs.config', 'nibs.profile', 'nibs.auth', 'nibs.product', 'nibs.offer', 'nibs.store-locator', 'nibs.gallery', 'nibs.settings', 'nibs.case'])
 
-    .run(function ($window, $location, $rootScope, $state, $ionicPlatform, $http, OpenFB, OpenLINE, FB_APP_ID, LINE_CHANNEL_ID, LINE_CHANNEL_SECRET, SERVER_URL) {
+    .run(function ($window, $location, $rootScope, $state, $ionicPlatform, $http, OpenFB, OpenLINE, FB_APP_ID, LINE_CHANNEL_ID, LINE_CHANNEL_SECRET, LINE_LOGIN_URL, CALLBACK_URL, SERVER_URL) {
 
         var user = JSON.parse($window.localStorage.getItem('user'));
 
@@ -10,7 +10,7 @@ var app = angular.module('nibs', ['ionic', 'openfb', 'openline', 'nibs.config', 
 
         // Intialize OpenFB Facebook library
         OpenFB.init(FB_APP_ID, $window.localStorage);
-        OpenLINE.init(LINE_CHANNEL_ID, LINE_CHANNEL_SECRET, $window.localStorage);
+        OpenLINE.init(LINE_CHANNEL_ID, LINE_CHANNEL_SECRET, LINE_LOGIN_URL, CALLBACK_URL);
         $ionicPlatform.ready(function() {
             if(window.StatusBar) {
                 StatusBar.styleDefault();
