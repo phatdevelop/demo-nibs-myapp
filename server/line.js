@@ -55,32 +55,32 @@ function login(req, res, next) {
     //     })
     //     .catch(next);
 
-    db.query('SELECT id, firstName, lastName, email, loyaltyid__c as externalUserId FROM salesforce.contact WHERE lineUserId__c=$1', [lineUserId], true)
-        .then(function (user) {
-            if (user) {
-                // The Line user is known
-                // Create a token and send it to the client.
-                winston.info('Known Line user');
-                return createAndSendToken(user);
-            } else {
-                db.query('SELECT id, firstName, lastName, email FROM salesforce.contact WHERE email=$1', [lineUserId], true)
-                    .then(function (user) {
-                        if (user) {
-                            // We already have a user with that email address
-                            // Add Line id to user record
-                            winston.info('We already have a user with that email address.');
-                            //updateUser(user, lineUser.id).then(createAndSendToken).catch(next);
-                        } else {
-                            // First time this Line user logs in (and we don't have a user with that email address)
-                            // Create a user
-                            winston.info('First time this Line user logs in');
-                            //createUser(lineUser).then(createAndSendToken).catch(next);
-                        }
-                    })
-                    .catch(next);
-            }
-        })
-        .catch(next);
+    // db.query('SELECT id, firstName, lastName, email, loyaltyid__c as externalUserId FROM salesforce.contact WHERE lineUserId__c=$1', [lineUserId], true)
+    //     .then(function (user) {
+    //         if (user) {
+    //             // The Line user is known
+    //             // Create a token and send it to the client.
+    //             winston.info('Known Line user');
+    //             return createAndSendToken(user);
+    //         } else {
+    //             db.query('SELECT id, firstName, lastName, email FROM salesforce.contact WHERE email=$1', [lineUserId], true)
+    //                 .then(function (user) {
+    //                     if (user) {
+    //                         // We already have a user with that email address
+    //                         // Add Line id to user record
+    //                         winston.info('We already have a user with that email address.');
+    //                         //updateUser(user, lineUser.id).then(createAndSendToken).catch(next);
+    //                     } else {
+    //                         // First time this Line user logs in (and we don't have a user with that email address)
+    //                         // Create a user
+    //                         winston.info('First time this Line user logs in');
+    //                         //createUser(lineUser).then(createAndSendToken).catch(next);
+    //                     }
+    //                 })
+    //                 .catch(next);
+    //         }
+    //     })
+    //     .catch(next);
 }
 
 // function validateLINEToken(lineToken, lineUserId) {
