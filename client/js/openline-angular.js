@@ -274,7 +274,8 @@ angular.module('openline', [])
                 alert('CORS not supported');
                 return;
               }
-              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
               xhr.withCredentials = true;
               // Response handlers.
               xhr.onload = function() {
