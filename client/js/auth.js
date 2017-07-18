@@ -93,8 +93,8 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
             linelogin: function(lineUser) {
                 console.log(JSON.stringify(lineUser));
                 console.log('token: ' + $window.sessionStorage.token);
-
-                return $http.post($rootScope.server.url + '/fblogin', {user: lineUser, token: $window.sessionStorage.token})
+                
+                return $http.post($rootScope.server.url + '/linelogin', {user: lineUser, token: $window.sessionStorage.token})
                     .success(function(data) {
                         $rootScope.user = data.user;
                         $window.localStorage.user = JSON.stringify(data.user);
