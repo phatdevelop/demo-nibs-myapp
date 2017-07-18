@@ -187,7 +187,7 @@ angular.module('openline', [])
 
             return $http({
                 method: 'POST',
-                url: 'https://www.api.line.me/v2/oauth/accessToken',
+                url: 'https://api.line.me/v2/oauth/accessToken',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'},
                 params: {
