@@ -152,6 +152,7 @@ angular.module('openline', [])
             return $.ajax({
                 type: "POST",
                 dataType: 'jsonp',
+                crossDomain: true,
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
