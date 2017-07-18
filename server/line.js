@@ -58,21 +58,12 @@ function login(req, res, next) {
 }
 
 function validateLINEToken(token, userId) {
-
     winston.info("Validating Line token: " + token + " userId: " + userId);
-
     var deferred = Q.defer();
 
-    https.post({
-    	method: 'POST',
-        url: 'https://api.line.me/v2/oauth/verify',
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        params: {
-            access_token: token
-        }
-    },function(res) {
+    var url = 'https://api.line.me/v2/oauth/verify?access_token=' + token;
+
+    https.post(url ,function(res) {
     	var body = '';
 
     	res.on('end', function() {
