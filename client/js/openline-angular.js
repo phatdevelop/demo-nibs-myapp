@@ -285,8 +285,8 @@ angular.module('openline', [])
               xhr.onerror = function() {
                 alert('Woops, there was an error making the request.');
               };
-
-              xhr.send();
+              var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
+              xhr.send(params);
 
             //return data;
         }
