@@ -4,6 +4,8 @@ angular.module('openline', [])
         var channelId,
             channelSecret,
             loginURL,
+            getTokenURL,
+            getUserURL,
             callbackURL,
             authorizationCode,
         // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
@@ -13,10 +15,12 @@ angular.module('openline', [])
         // Used in the exit event handler to identify if the login has already been processed elsewhere (in the oauthCallback function)
             loginSucceeded;
 
-        function init(configChannelId, configChannelSecret, configLoginURL, configCallbackURL) {
+        function init(configChannelId, configChannelSecret, configLoginURL, configGetTokenURL, configGetUserURL, configCallbackURL) {
             channelId = configChannelId;
             channelSecret = configChannelSecret;
             loginURL = configLoginURL;
+            getTokenURL = configGetTokenURL;
+            getUserURL = configGetUserURL;
             callbackURL = configCallbackURL;
         }
 
@@ -130,9 +134,9 @@ angular.module('openline', [])
         // }
 
         function getAccessToken() {
-            return $http.json({
+            return $http({
                 method: 'POST',
-                url: 'https://api.line.me/v2/oauth/accessToken',
+                url: getTokenURL,
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
@@ -142,7 +146,8 @@ angular.module('openline', [])
                     client_secret: channelSecret,
                     code: authorizationCode,
                     redirect_uri: callbackURL
-                }
+                },
+                useDefaultXhrHeader: 'false'
             });
 
             // var url = 'https://api.line.me/v2/oauth/accessToken';
@@ -186,7 +191,7 @@ angular.module('openline', [])
             
             return $http({
                 method: 'GET',
-                url: 'https://api.line.me/v2/profile', 
+                url: configGetUserURL, 
                 headers: {'Authorization': 'Bearer ' + access_token}
             })
             // .error(function(data, status, headers, config) {

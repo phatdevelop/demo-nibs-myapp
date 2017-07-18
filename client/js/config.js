@@ -10,6 +10,10 @@ angular.module('nibs.config', [])
 
     .constant('LINE_LOGIN_URL', 'https://access.line.me/dialog/oauth/weblogin')
 
+    .constant('LINE_GET_TOKEN_URL', 'https://access.line.me/dialog/oauth/weblogin')
+
+    .constant('LINE_GET_USER_URL', 'https://api.line.me/v2/profile')
+
     .constant('CALLBACK_URL', 'https://demo-nibs-myapp-k.herokuapp.com/oauthcallback.html')    
 
     .constant('STATUS_LABELS', [
