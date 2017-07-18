@@ -183,14 +183,14 @@ angular.module('openline', [])
         }
 
         function getAccessToken() {
-            var authorizationCode = tokenStore['code'];
+            //var authorizationCode = tokenStore['code'];
 
+            //return $http.jsonp('https://api.line.me/v2/oauth/accessToken', 
             // return $http({
             //     method: 'POST',
             //     url: 'https://api.line.me/v2/oauth/accessToken',
             //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded',
-            //         'Access-Control-Allow-Origin': 'https://demo-nibs-myapp-k.herokuapp.com'},
+            //         'Content-Type': 'application/x-www-form-urlencoded'},
             //     params: {
             //         grant_type: 'authorization_code',
             //         client_id: channelId,
@@ -199,20 +199,26 @@ angular.module('openline', [])
             //         redirect_uri: CALLBACK_URL
             //     }
             // })
-            angular.element.ajax({
-                       type: 'GET',
-                       url: "someurl",
-                       processData: true,
-                       data: {},
-                       dataType: "json",
-                       success: function (data) {
-                           processData(data);
-                       }
-            });
+
+            var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            xhr.withCredentials  = true;
+            var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
+            xhr.onreadystatechange = function(data) {//Call a function when the state changes.
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    alert(xhr.responseText);
+                    abc(data);
+                }
+            }
+
+            xhr.send(params);
+
             var data;
-            function processData(data){
+            function abc(data) {
                 data = data;
             }
+            
+            return data;
         }
 
         function parseQueryString(queryString) {
