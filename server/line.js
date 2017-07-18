@@ -58,7 +58,7 @@ function validateLINEToken(lineToken, lineUserId) {
 
     winston.info("Validating Line token: " + lineToken + " userId: " + lineUserId);
 
-    var deferred = Q.defer(),
+    var deferred = Q.defer();
 
     https.post({
     	method: 'POST',
