@@ -9,7 +9,7 @@ function login(req, res, next) {
 	console.log('Vao day ne');
 	winston.info('Vao day ne');
 	var lineUserId = req.params.lineUserId;
-    var lineToken = req.params.token;
+    var token = req.params.token;
 
     // function createAndSendToken(user) {
     //     console.log('send token for user:' + JSON.stringify(user));
