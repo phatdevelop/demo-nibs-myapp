@@ -183,34 +183,21 @@ angular.module('openline', [])
         }
 
         function getAccessToken() {
-            //var authorizationCode = tokenStore['code'];
+            var authorizationCode = tokenStore['code'];
 
-            //return $http.jsonp('https://api.line.me/v2/oauth/accessToken', 
-            // return $http({
-            //     method: 'POST',
-            //     url: 'https://api.line.me/v2/oauth/accessToken',
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded'},
-            //     params: {
-            //         grant_type: 'authorization_code',
-            //         client_id: channelId,
-            //         client_secret: '59887b50400fcd8bd40359b9045ce39b',
-            //         code: authorizationCode,
-            //         redirect_uri: CALLBACK_URL
-            //     }
-            // })
-
-            var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-            xhr.withCredentials  = true;
-            var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
-            xhr.onreadystatechange = function() {//Call a function when the state changes.
-                if(xhr.readyState == 4 && xhr.status == 200) {
-                    alert(xhr.responseText);
+            return $http({
+                method: 'POST',
+                url: 'https://api.line.me/v2/oauth/accessToken',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'},
+                params: {
+                    grant_type: 'authorization_code',
+                    client_id: channelId,
+                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
+                    code: authorizationCode,
+                    redirect_uri: CALLBACK_URL
                 }
-            }
-            xhr.send(params);
-            return xhr;
+            })
         }
 
         function parseQueryString(queryString) {
