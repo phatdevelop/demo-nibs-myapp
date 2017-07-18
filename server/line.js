@@ -7,6 +7,7 @@ var winston = require("winston"),
 
 function login(req, res, next) {
 	console.log('Vao day ne');
+	winston.info('Vao day ne');
 	var lineUser = req.body.user,
         lineToken = req.body.token;
 
