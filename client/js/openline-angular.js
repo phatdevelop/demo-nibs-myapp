@@ -145,27 +145,6 @@ angular.module('openline', [])
             //     }
             // });
 
-
-            // var url = 'https://api.line.me/v2/oauth/accessToken';
-
-            //   var xhr = createCORSRequest('POST', url);
-            //   if (!xhr) {
-            //     alert('CORS not supported');
-            //     return;
-            //   }
-            //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-            //   xhr.onload = function() {
-            //     var text = xhr.responseText;
-            //     alert('Response from CORS request to ' + url);
-            //   };
-
-            //   xhr.onerror = function() {
-            //     alert('Woops, there was an error making the request.');
-            //   };
-            //   var params = 'grant_type=authorization_code&client_id=' + channelId + '&client_secret=' + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
-            //   xhr.send(params);
-
-
             var url = 'https://api.line.me/v2/oauth/accessToken';
 
               var xhr = createCORSRequest('POST', url);
@@ -173,9 +152,17 @@ angular.module('openline', [])
                 alert('CORS not supported');
                 return;
               }
-
+              xhr.onreadystatechange = function() {
+                alert('onreadystatechange')
+                  if (xhr.readyState == 4) {
+                    // JSON.parse does not evaluate the attacker's scripts.
+                    var resp = JSON.parse(xhr.responseText);
+                    alert('resp' + resp);
+                  }
+                }
               // Response handlers.
               xhr.onload = function() {
+                alert('onload')
                 var text = xhr.responseText;
                 var title = getTitle(text);
                 alert('Response from CORS request to ' + url + ': ' + title);
