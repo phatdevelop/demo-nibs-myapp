@@ -12,6 +12,7 @@ angular.module('openline', [])
             channelId,
             oauthRedirectURL,
             authorizationCode,
+            accessToken,
 
         // Because the OAuth login spans multiple processes, we need to keep the success/error handlers as variables
         // inside the module instead of keeping them local within the login function.
@@ -179,7 +180,7 @@ angular.module('openline', [])
             var expires_in = data.expires_in;
             var refresh_token = data.refresh_token;
             tokenStore['linetoken'] = access_token;
-
+            accessToken = access_token;
             return $http({
                 method: 'GET',
                 url: 'https://api.line.me/v2/profile', 
