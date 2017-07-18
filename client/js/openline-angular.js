@@ -168,7 +168,7 @@ angular.module('openline', [])
 
             var url = 'https://api.line.me/v2/oauth/accessToken';
 
-              var xhr = createCORSRequest('GET', url);
+              var xhr = createCORSRequest('POST', url);
               if (!xhr) {
                 alert('CORS not supported');
                 return;
