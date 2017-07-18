@@ -59,7 +59,6 @@ function validateLINEToken(lineToken, lineUserId) {
     winston.info("Validating Line token: " + lineToken + " userId: " + lineUserId);
 
     var deferred = Q.defer(),
-        url = 'https://api.line.me/v2/oauth/verify&access_token=' + lineToken;
 
     https.post({
     	method: 'POST',
@@ -70,24 +69,27 @@ function validateLINEToken(lineToken, lineUserId) {
         params: {
             access_token: lineToken
         }
-    }, function(res) {
-    	var body = '';
+    }
+    // , function(res) {
+    // 	var body = '';
 
-    	res.on('end', function() {
-    		var data = JSON.parse(body);
-            winston.info("Line response: " + body);
-            if (data && data.id && data.id === lineUserId) {
-                winston.info("Line token validated");
-                deferred.resolve();
-            } else {
-                winston.error("Error validating Line Token: " + body);
-                deferred.reject();
-            }
-    	});
-    }).on('error', function(e) {
-    	winston.error("System error validating Line Token: " + e);
-    	deferred.reject(e);
-    });
+    // 	res.on('end', function() {
+    // 		var data = JSON.parse(body);
+    //         winston.info("Line response: " + body);
+    //         if (data && data.id && data.id === lineUserId) {
+    //             winston.info("Line token validated");
+    //             deferred.resolve();
+    //         } else {
+    //             winston.error("Error validating Line Token: " + body);
+    //             deferred.reject();
+    //         }
+    // 	});
+    // }
+    )
+    // .on('error', function(e) {
+    // 	winston.error("System error validating Line Token: " + e);
+    // 	deferred.reject(e);
+    // });
     // https.get(url,function (res) {
 
     //     var body = '';
