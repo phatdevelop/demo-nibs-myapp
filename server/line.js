@@ -8,7 +8,7 @@ var winston = require("winston"),
 function login(req, res, next) {
 	console.log('Vao day ne');
 	winston.info('Vao day ne');
-	var lineUser = req.params.lineUser;
+	var lineUserId = req.params.lineUserId;
     var lineToken = req.params.token;
 
     // function createAndSendToken(user) {
@@ -55,7 +55,7 @@ function login(req, res, next) {
     //     })
     //     .catch(next);
 
-    db.query('SELECT id, firstName, lastName, email, loyaltyid__c as externalUserId FROM salesforce.contact WHERE lineUserId__c=$1', [lineUser.userId], true)
+    db.query('SELECT id, firstName, lastName, email, loyaltyid__c as externalUserId FROM salesforce.contact WHERE lineUserId__c=$1', [lineUserId], true)
         .then(function (user) {
             if (user) {
                 // The Line user is known
@@ -63,7 +63,7 @@ function login(req, res, next) {
                 winston.info('Known Line user');
                 return createAndSendToken(user);
             } else {
-                db.query('SELECT id, firstName, lastName, email FROM salesforce.contact WHERE email=$1', [lineUser.email], true)
+                db.query('SELECT id, firstName, lastName, email FROM salesforce.contact WHERE email=$1', [lineUserId], true)
                     .then(function (user) {
                         if (user) {
                             // We already have a user with that email address
