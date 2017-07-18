@@ -172,7 +172,6 @@ angular.module('openline', [])
                 alert('Woops, there was an error making the request.');
               };
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-              xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://demo-nibs-myapp-k.herokuapp.com');
               xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
               var params = 'grant_type=authorization_code&client_id=' + channelId + '&client_secret=' + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
               xhr.send(params);
