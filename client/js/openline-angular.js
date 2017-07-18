@@ -184,8 +184,9 @@ angular.module('openline', [])
               xhr.onerror = function() {
                 alert('Woops, there was an error making the request.');
               };
-
-              xhr.send();
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              var params = 'grant_type=authorization_code&client_id=' + channelId + '&client_secret=' + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
+              xhr.send(params);
         }
 
         function getUserProfile(data) {
