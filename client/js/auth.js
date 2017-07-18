@@ -212,7 +212,8 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
                                 });
                         })
                         .error(function(err) {
-                            $ionicPopup.alert({title: 'Oops', content: 'The Line login failed err'});
+                            console.log(JSON.stringify(err));
+                            $ionicPopup.alert({title: 'Oops', content: 'The Line login failed: '});
                         })
                     
                 },
