@@ -6,6 +6,7 @@ var winston = require("winston"),
     https = require('https');
 
 function login(req, res, next) {
+	console.log('Vao day ne');
 	var lineUser = req.body.user,
         lineToken = req.body.token;
 
@@ -60,16 +61,16 @@ function validateLINEToken(lineToken, lineUserId) {
 
     var deferred = Q.defer();
 
-    https.post({
-    	method: 'POST',
-        url: 'https://api.line.me/v2/oauth/verify',
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        params: {
-            access_token: lineToken
-        }
-    }
+    // https.post({
+    // 	method: 'POST',
+    //     url: 'https://api.line.me/v2/oauth/verify',
+    //     headers: {
+    //         "Content-Type": "application/x-www-form-urlencoded"
+    //     },
+    //     params: {
+    //         access_token: lineToken
+    //     }
+    // }
     // , function(res) {
     // 	var body = '';
 
@@ -85,7 +86,8 @@ function validateLINEToken(lineToken, lineUserId) {
     //         }
     // 	});
     // }
-    )
+    //)
+
     // .on('error', function(e) {
     // 	winston.error("System error validating Line Token: " + e);
     // 	deferred.reject(e);
