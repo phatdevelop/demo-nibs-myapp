@@ -8,11 +8,9 @@ var winston = require("winston"),
 function login(req, res, next) {
 	console.log('Vao day ne');
 	winston.info('Vao day ne');
-	//var lineUserId = req.body.lineUser;
-	var lineUser = req.body.lineUser;
-	var lineUserId = lineUser.userId;
-    //var token = req.body.token;
-    var token = 'abc';
+	var user = req.body.user;
+	var userId = user.userId;
+    var token = req.body.token;
 
     function createAndSendToken(user) {
         console.log('send token for user:' + JSON.stringify(user));
@@ -26,10 +24,10 @@ function login(req, res, next) {
     }
 
     // Check if Line token is valid and matches the Line User id provided.
-    validateLINEToken(token, lineUserId)
+    validateLINEToken(token, userId)
         .then(function () {
             // The Line token is valid
-            db.query('SELECT id, firstName, lastName, email, loyaltyid__c as externalUserId FROM salesforce.contact WHERE lineUserId__c=$1', [lineUserId], true)
+            db.query('SELECT id, firstName, lastName, email, loyaltyid__c as externalUserId FROM salesforce.contact WHERE lineUserId__c=$1', [userId], true)
                 .then(function (user) {
                     if (user) {
                         // The Line user is known
@@ -37,18 +35,18 @@ function login(req, res, next) {
                         winston.info('Known Line user');
                         return createAndSendToken(user);
                     } else {
-                        db.query('SELECT id, firstName, lastName, email FROM salesforce.contact WHERE email=$1', [lineUserId], true)
+                        db.query('SELECT id, firstName, lastName, email FROM salesforce.contact WHERE email=$1', [userId], true)
                             .then(function (user) {
                                 if (user) {
                                     // We already have a user with that email address
                                     // Add Line id to user record
                                     winston.info('We already have a user with that email address.');
-                                    //updateUser(user, lineUser.id).then(createAndSendToken).catch(next);
+                                    //updateUser(user, user.id).then(createAndSendToken).catch(next);
                                 } else {
                                     // First time this Line user logs in (and we don't have a user with that email address)
                                     // Create a user
                                     winston.info('First time this Line user logs in');
-                                    //createUser(lineUser).then(createAndSendToken).catch(next);
+                                    //createUser(user).then(createAndSendToken).catch(next);
                                 }
                             })
                             .catch(next);
@@ -59,9 +57,9 @@ function login(req, res, next) {
         .catch(next);
 }
 
-function validateLINEToken(token, lineUserId) {
+function validateLINEToken(token, userId) {
 
-    winston.info("Validating Line token: " + token + " userId: " + lineUserId);
+    winston.info("Validating Line token: " + token + " userId: " + userId);
 
     var deferred = Q.defer();
 
@@ -80,7 +78,7 @@ function validateLINEToken(token, lineUserId) {
     	res.on('end', function() {
     		var data = JSON.parse(body);
             winston.info("Line response: " + body);
-            if (data && data.id && data.id === lineUserId) {
+            if (data && data.id && data.id === userId) {
                 winston.info("Line token validated");
                 deferred.resolve();
             } else {
