@@ -43,7 +43,7 @@ app.post('/login', auth.login);
 app.post('/logout', auth.validateToken, auth.logout);
 app.post('/signup', auth.signup);
 app.post('/fblogin', facebook.login);
-app.post('/linelogin', line.login);
+app.post('/linelogin/:lineUser/:token', line.login);
 
 app.get('/users/me', auth.validateToken, users.getProfile);
 app.put('/users/me', auth.validateToken, users.updateProfile);
