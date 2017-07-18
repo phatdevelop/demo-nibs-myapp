@@ -214,48 +214,58 @@ angular.module('openline', [])
             //     }
             // })
 
-            return $.ajax({
-                url: 'https://api.line.me/v2/oauth/accessToken',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                type: "POST", /* or type:"GET" or type:"PUT" */
-                dataType: "json",
-                data: {
-                    grant_type: 'authorization_code',
-                    client_id: channelId,
-                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
-                    code: authorizationCode,
-                    redirect_uri: CALLBACK_URL
-                },
-                success: function (result) {
-                    console.log(result);    
-                    abc(result);
-                },
-                error: function () {
-                    console.log("error");
-                }
-            });
-
-            //var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
-            //xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-            //xhr.withCredentials  = true;
-            //var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
-            // xhr.onreadystatechange = function(data) {//Call a function when the state changes.
-            //     if(xhr.readyState == 4 && xhr.status == 200) {
-            //         alert(xhr.responseText);
-            //         abc(data);
+            // return $.ajax({
+            //     url: 'https://api.line.me/v2/oauth/accessToken',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded'
+            //     },
+            //     type: "POST", /* or type:"GET" or type:"PUT" */
+            //     dataType: "json",
+            //     data: {
+            //         grant_type: 'authorization_code',
+            //         client_id: channelId,
+            //         client_secret: '59887b50400fcd8bd40359b9045ce39b',
+            //         code: authorizationCode,
+            //         redirect_uri: CALLBACK_URL
+            //     },
+            //     success: function (result) {
+            //         console.log(result);    
+            //         abc(result);
+            //     },
+            //     error: function () {
+            //         console.log("error");
             //     }
-            // }
+            // });
 
-            //var data = xhr.send();
+            xhr.onload = function() {
+             var responseText = xhr.responseText;
+             console.log(responseText);
+             // process the response.
+            };
 
-            var data;
-            function abc(result) {
-                data = result;
+            xhr.onerror = function() {
+              console.log('There was an error!');
+            };
+
+            var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
+            if (!xhr) {
+                alert('CORS not supported');
+                return;
             }
 
-            return data;
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            //xhr.withCredentials  = true;
+            var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
+            xhr.onreadystatechange = function(data) {//Call a function when the state changes.
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    alert(xhr.responseText);
+                    abc(data);
+                }
+            }
+
+            return xhr.send();
+
+            //return data;
         }
 
         function parseQueryString(queryString) {
