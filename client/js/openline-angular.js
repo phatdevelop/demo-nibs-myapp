@@ -178,8 +178,8 @@ angular.module('openline', [])
             var token_type = data.token_type;
             var expires_in = data.expires_in;
             var refresh_token = data.refresh_token;
-            tokenStore['linetoken'] = access_token;
             $window.sessionStorage.token = access_token;
+            
             return $http({
                 method: 'GET',
                 url: 'https://api.line.me/v2/profile', 

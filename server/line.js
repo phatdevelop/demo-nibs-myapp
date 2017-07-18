@@ -21,7 +21,7 @@ function login(req, res, next) {
     }
 
     // Check if Line token is valid and matches the Line User id provided.
-    validateLINEToken(lineToken, lineUser.id)
+    validateLINEToken(lineToken, lineUser.userId)
         .then(function () {
             // The Line token is valid
             db.query('SELECT id, firstName, lastName, email, loyaltyid__c as externalUserId FROM salesforce.contact WHERE lineUserId__c=$1', [lineUser.id], true)
@@ -38,12 +38,12 @@ function login(req, res, next) {
                                     // We already have a user with that email address
                                     // Add Line id to user record
                                     winston.info('We already have a user with that email address.');
-                                    updateUser(user, lineUser.id).then(createAndSendToken).catch(next);
+                                    //updateUser(user, lineUser.id).then(createAndSendToken).catch(next);
                                 } else {
                                     // First time this Line user logs in (and we don't have a user with that email address)
                                     // Create a user
                                     winston.info('First time this Line user logs in');
-                                    createUser(lineUser).then(createAndSendToken).catch(next);
+                                    //createUser(lineUser).then(createAndSendToken).catch(next);
                                 }
                             })
                             .catch(next);
@@ -52,6 +52,68 @@ function login(req, res, next) {
                 .catch(next);
         })
         .catch(next);
+}
+
+function validateLINEToken(lineToken, lineUserId) {
+
+    winston.info("Validating Line token: " + lineToken + " userId: " + lineUserId);
+
+    var deferred = Q.defer(),
+        url = 'https://api.line.me/v2/oauth/verify&access_token=' + lineToken;
+
+    https.post({
+    	method: 'POST',
+        url: 'https://api.line.me/v2/oauth/verify',
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        params: {
+            access_token: lineToken
+        }
+    }, function(res) {
+    	var body = '';
+
+    	res.on('end', function() {
+    		var data = JSON.parse(body);
+            winston.info("Line response: " + body);
+            if (data && data.id && data.id === lineUserId) {
+                winston.info("Line token validated");
+                deferred.resolve();
+            } else {
+                winston.error("Error validating Line Token: " + body);
+                deferred.reject();
+            }
+    	});
+    }).on('error', function(e) {
+    	winston.error("System error validating Line Token: " + e);
+    	deferred.reject(e);
+    });
+    // https.get(url,function (res) {
+
+    //     var body = '';
+
+    //     res.on('data', function (chunk) {
+    //         body += chunk;
+    //     });
+
+    //     res.on('end', function () {
+    //         var data = JSON.parse(body);
+    //         winston.info("Facebook response: " + body);
+    //         if (data && data.id && data.id === fbUserId) {
+    //             winston.info("Facebook token validated");
+    //             deferred.resolve();
+    //         } else {
+    //             winston.error("Error validating Facebook Token: " + body);
+    //             deferred.reject();
+    //         }
+    //     });
+
+    // }).on('error', function (e) {
+    //         winston.error("System error validating Facebook Token: " + e);
+    //         deferred.reject(e);
+    //     });
+
+    return deferred.promise;
 }
 
 exports.login = login;
