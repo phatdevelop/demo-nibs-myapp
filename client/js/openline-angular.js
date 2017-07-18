@@ -156,9 +156,9 @@ angular.module('openline', [])
                 alert('onreadystatechange')
                   if (xhr.readyState == 4) {
                     // JSON.parse does not evaluate the attacker's scripts.
-                    alert('xhr.responseText: ' + xhr.responseText);
+                    console.log('xhr.responseText: ' + xhr.responseText);
                     var resp = JSON.parse(xhr.responseText);
-                    alert('resp' + resp);
+                    console.log('resp' + resp);
                   }
                 }
               // Response handlers.
@@ -173,6 +173,7 @@ angular.module('openline', [])
                 alert('Woops, there was an error making the request.');
               };
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://demo-nibs-myapp-k.herokuapp.com');
               xhr.withCredentials = true;
               var params = 'grant_type=authorization_code&client_id=' + channelId + '&client_secret=' + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
               xhr.send(params);
