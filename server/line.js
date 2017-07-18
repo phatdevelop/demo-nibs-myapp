@@ -6,7 +6,7 @@ var winston = require("winston"),
     https = require('https');
 
 function login(req, res, next) {
-	console.log('into here')
+	console.log('into here');
 	// var lineUser = req.body.user,
  //        lineToken = req.body.token;
 
