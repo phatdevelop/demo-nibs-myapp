@@ -149,7 +149,7 @@ angular.module('openline', [])
             //     }
             // });
 
-            $.ajax({
+            return $.ajax({
                 type: "POST",
                 dataType: 'jsonp',
                 crossDomain: true,
@@ -163,19 +163,13 @@ angular.module('openline', [])
                     code: authorizationCode,
                     redirect_uri: callbackURL
                 },
-                success: function(data) {
-                    alert(data);
-
+                success: function(response) {
+                    alert("success");
                   },
-                  error: function(err) {
-                    console.log(JSON.stringify(err));
+                  error: function(response) {
+                    console.log(JSON.stringify(response));
                   }
             });
-            var data;
-            function setData(data) {
-                data = data;
-            }
-            return data;
 
             // var url = 'https://api.line.me/v2/oauth/accessToken';
 
