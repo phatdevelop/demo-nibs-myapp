@@ -134,9 +134,24 @@ angular.module('openline', [])
         // }
 
         function getAccessToken() {
-            return $http({
-                method: 'POST',
-                url: getTokenURL,
+            // return $http({
+            //     method: 'POST',
+            //     url: getTokenURL,
+            //     headers: {
+            //         "Content-Type": "application/x-www-form-urlencoded"
+            //     },
+            //     params: {
+            //         grant_type: 'authorization_code',
+            //         client_id: channelId,
+            //         client_secret: channelSecret,
+            //         code: authorizationCode,
+            //         redirect_uri: callbackURL
+            //     }
+            // });
+
+            return $.ajax({
+                type: "POST",
+                dataType: 'jsonp',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
@@ -147,7 +162,12 @@ angular.module('openline', [])
                     code: authorizationCode,
                     redirect_uri: callbackURL
                 },
-                useDefaultXhrHeader: 'false'
+                success: function(response) {
+                    alert("success");
+                  },
+                  error: function(response) {
+                    console.log(JSON.stringify(response));
+                  }
             });
 
             // var url = 'https://api.line.me/v2/oauth/accessToken';
