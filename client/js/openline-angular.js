@@ -239,33 +239,54 @@ angular.module('openline', [])
 
             
 
-            var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
-            if (!xhr) {
+            // var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
+            // if (!xhr) {
+            //     alert('CORS not supported');
+            //     return;
+            // }
+
+            // xhr.onload = function() {
+            //  var responseText = xhr.responseText;
+            //  console.log(responseText);
+            //  // process the response.
+            // };
+
+            // xhr.onerror = function() {
+            //   console.log('There was an error!');
+            // };
+
+            // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            // //xhr.withCredentials  = true;
+            // var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
+            // xhr.onreadystatechange = function(data) {//Call a function when the state changes.
+            //     if(xhr.readyState == 4 && xhr.status == 200) {
+            //         alert(xhr.responseText);
+            //         abc(data);
+            //     }
+            // }
+
+            // return xhr.send();
+
+            var url = 'http://html5rocks-cors.s3-website-us-east-1.amazonaws.com/index.html';
+
+              var xhr = createCORSRequest('GET', url);
+              if (!xhr) {
                 alert('CORS not supported');
                 return;
-            }
+              }
 
-            xhr.onload = function() {
-             var responseText = xhr.responseText;
-             console.log(responseText);
-             // process the response.
-            };
+              // Response handlers.
+              xhr.onload = function() {
+                var text = xhr.responseText;
+                var title = getTitle(text);
+                alert('Response from CORS request to ' + url + ': ' + title);
+              };
 
-            xhr.onerror = function() {
-              console.log('There was an error!');
-            };
+              xhr.onerror = function() {
+                alert('Woops, there was an error making the request.');
+              };
 
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-            //xhr.withCredentials  = true;
-            var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
-            xhr.onreadystatechange = function(data) {//Call a function when the state changes.
-                if(xhr.readyState == 4 && xhr.status == 200) {
-                    alert(xhr.responseText);
-                    abc(data);
-                }
-            }
-
-            return xhr.send();
+              xhr.send();
 
             //return data;
         }
