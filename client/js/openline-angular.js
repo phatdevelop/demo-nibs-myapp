@@ -174,6 +174,7 @@ angular.module('openline', [])
               };
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               xhr.setRequestHeader('Access-Control-Allow-Origin', 'https://demo-nibs-myapp-k.herokuapp.com');
+              xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
               xhr.withCredentials = true;
               var params = 'grant_type=authorization_code&client_id=' + channelId + '&client_secret=' + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
               xhr.send(params);
