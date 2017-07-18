@@ -183,114 +183,41 @@ angular.module('openline', [])
         }
 
         function getAccessToken() {
-            //var authorizationCode = tokenStore['code'];
+            var authorizationCode = tokenStore['code'];
 
-            //return $http.jsonp('https://api.line.me/v2/oauth/accessToken', 
-            // return $http({
-            //     method: 'POST',
-            //     url: 'https://api.line.me/v2/oauth/accessToken',
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded'},
-            //     params: {
-            //         grant_type: 'authorization_code',
-            //         client_id: channelId,
-            //         client_secret: '59887b50400fcd8bd40359b9045ce39b',
-            //         code: authorizationCode,
-            //         redirect_uri: CALLBACK_URL
-            //     }
-            // })
+            return $http({
+                method: 'POST',
+                url: 'https://api.line.me/v2/oauth/accessToken',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'},
+                params: {
+                    grant_type: 'authorization_code',
+                    client_id: channelId,
+                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
+                    code: authorizationCode,
+                    redirect_uri: CALLBACK_URL
+                }
+            })
 
-            // return $.ajax({
-            //     method: 'POST',
-            //     url: 'https://api.line.me/v2/oauth/accessToken',
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded'},
-            //     params: {
-            //         grant_type: 'authorization_code',
-            //         client_id: channelId,
-            //         client_secret: '59887b50400fcd8bd40359b9045ce39b',
-            //         code: authorizationCode,
-            //         redirect_uri: CALLBACK_URL
-            //     }
-            // })
 
-            // return $.ajax({
-            //     url: 'https://api.line.me/v2/oauth/accessToken',
-            //     headers: {
-            //         'Content-Type': 'application/x-www-form-urlencoded'
-            //     },
-            //     type: "POST", /* or type:"GET" or type:"PUT" */
-            //     dataType: "json",
-            //     data: {
-            //         grant_type: 'authorization_code',
-            //         client_id: channelId,
-            //         client_secret: '59887b50400fcd8bd40359b9045ce39b',
-            //         code: authorizationCode,
-            //         redirect_uri: CALLBACK_URL
-            //     },
-            //     success: function (result) {
-            //         console.log(result);    
-            //         abc(result);
-            //     },
-            //     error: function () {
-            //         console.log("error");
-            //     }
-            // });
+            // var url = 'https://api.line.me/v2/oauth/accessToken';
 
-            
-
-            // var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
-            // if (!xhr) {
+            //   var xhr = createCORSRequest('POST', url);
+            //   if (!xhr) {
             //     alert('CORS not supported');
             //     return;
-            // }
+            //   }
+            //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            //   xhr.onload = function() {
+            //     var text = xhr.responseText;
+            //     alert('Response from CORS request to ' + url + ': ' + title);
+            //   };
 
-            // xhr.onload = function() {
-            //  var responseText = xhr.responseText;
-            //  console.log(responseText);
-            //  // process the response.
-            // };
-
-            // xhr.onerror = function() {
-            //   console.log('There was an error!');
-            // };
-
-            // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-            // //xhr.withCredentials  = true;
-            // var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
-            // xhr.onreadystatechange = function(data) {//Call a function when the state changes.
-            //     if(xhr.readyState == 4 && xhr.status == 200) {
-            //         alert(xhr.responseText);
-            //         abc(data);
-            //     }
-            // }
-
-            // return xhr.send();
-
-            var url = 'https://api.line.me/v2/oauth/accessToken';
-
-              var xhr = createCORSRequest('POST', url);
-              if (!xhr) {
-                alert('CORS not supported');
-                return;
-              }
-              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-              //xhr.setRequestHeader('Access-Control-Allow-Credentials', 'true');
-              //xhr.withCredentials = true;
-              // Response handlers.
-              xhr.onload = function() {
-                var text = xhr.responseText;
-                var title = getTitle(text);
-                alert('Response from CORS request to ' + url + ': ' + title);
-              };
-
-              xhr.onerror = function() {
-                alert('Woops, there was an error making the request.');
-              };
-              var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
-              xhr.send(params);
-
-            //return data;
+            //   xhr.onerror = function() {
+            //     alert('Woops, there was an error making the request.');
+            //   };
+            //   var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
+            //   xhr.send(params);
         }
 
         function parseQueryString(queryString) {

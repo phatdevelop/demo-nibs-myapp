@@ -191,12 +191,13 @@ angular.module('nibs.auth', ['openfb', 'openline', 'nibs.config'])
             console.log(OpenLINE);
             OpenLINE.login()
                 .then(function() {
-                    OpenLINE.getAccessToken(function(err, data) {
-                        console.log('err: ' + err);
-                        console.log('data: ' + data);
-                    })
-                        
-                        
+                    OpenLINE.getAccessToken()
+                        .success(function(data) {
+                            console.log('data: ' + data);
+                        })
+                        .error(function(err) {
+                            console.log('err: ' + err);
+                        })
                     // OpenLINE.get('/me', {fields: 'id'})
                     //     .success(function(lineUser) {
                     //         console.log('aaaaaaaalineUser: ' + lineUser);
