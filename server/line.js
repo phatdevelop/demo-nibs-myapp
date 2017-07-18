@@ -8,8 +8,11 @@ var winston = require("winston"),
 function login(req, res, next) {
 	console.log('Vao day ne');
 	winston.info('Vao day ne');
-	var lineUserId = req.params.lineUserId;
-    var token = req.params.token;
+	//var lineUserId = req.body.lineUser;
+	var lineUser = req.body.lineUser;
+	var lineUserId = lineUser.userId;
+    //var token = req.body.token;
+    var token = 'abc';
 
     function createAndSendToken(user) {
         console.log('send token for user:' + JSON.stringify(user));
@@ -23,7 +26,7 @@ function login(req, res, next) {
     }
 
     // Check if Line token is valid and matches the Line User id provided.
-    validateLINEToken(lineToken, lineUserId)
+    validateLINEToken(token, lineUserId)
         .then(function () {
             // The Line token is valid
             db.query('SELECT id, firstName, lastName, email, loyaltyid__c as externalUserId FROM salesforce.contact WHERE lineUserId__c=$1', [lineUserId], true)
@@ -56,9 +59,9 @@ function login(req, res, next) {
         .catch(next);
 }
 
-function validateLINEToken(lineToken, lineUserId) {
+function validateLINEToken(token, lineUserId) {
 
-    winston.info("Validating Line token: " + lineToken + " userId: " + lineUserId);
+    winston.info("Validating Line token: " + token + " userId: " + lineUserId);
 
     var deferred = Q.defer();
 
@@ -69,7 +72,7 @@ function validateLINEToken(lineToken, lineUserId) {
             "Content-Type": "application/x-www-form-urlencoded"
         },
         params: {
-            access_token: lineToken
+            access_token: token
         }
     },function(res) {
     	var body = '';
