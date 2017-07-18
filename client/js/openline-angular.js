@@ -186,19 +186,29 @@ angular.module('openline', [])
             //var authorizationCode = tokenStore['code'];
 
             //return $http.jsonp('https://api.line.me/v2/oauth/accessToken', 
-            return $http({
-                method: 'POST',
-                url: 'https://api.line.me/v2/oauth/accessToken',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'},
-                params: {
-                    grant_type: 'authorization_code',
-                    client_id: channelId,
-                    client_secret: '59887b50400fcd8bd40359b9045ce39b',
-                    code: authorizationCode,
-                    redirect_uri: CALLBACK_URL
+            // return $http({
+            //     method: 'POST',
+            //     url: 'https://api.line.me/v2/oauth/accessToken',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded'},
+            //     params: {
+            //         grant_type: 'authorization_code',
+            //         client_id: channelId,
+            //         client_secret: '59887b50400fcd8bd40359b9045ce39b',
+            //         code: authorizationCode,
+            //         redirect_uri: CALLBACK_URL
+            //     }
+            // })
+
+            var xhr = createCORSRequest('POST', 'https://api.line.me/v2/oauth/accessToken');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+            var params = "grant_type=authorization_code&client_id=" + channelId + '&client_secret=59887b50400fcd8bd40359b9045ce39b&code=' + authorizationCode + '&redirect_uri=' + CALLBACK_URL;
+            xhr.onreadystatechange = function() {//Call a function when the state changes.
+                if(xhr.readyState == 4 && xhr.status == 200) {
+                    alert(xhr.responseText);
                 }
-            })
+            }
+            xhr.send(params);
         }
 
         function parseQueryString(queryString) {
@@ -210,6 +220,25 @@ angular.module('openline', [])
                 obj[splitter[0]] = splitter[1];
             });
             return obj;
+        }
+
+        function createCORSRequest(method, url) {
+            var xhr = new XMLHttpRequest();
+            if ("withCredentials" in xhr) {
+                // Check if the XMLHttpRequest object has a "withCredentials" property.
+                // "withCredentials" only exists on XMLHTTPRequest2 objects.
+                xhr.open(method, url, true);
+
+            } else if (typeof XDomainRequest != "undefined") {
+                // Otherwise, check if XDomainRequest.
+                // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+                xhr = new XDomainRequest();
+                xhr.open(method, url);
+            } else {
+                // Otherwise, CORS is not supported by the browser.
+                xhr = null;
+            }
+            return xhr;
         }
 
         return {
