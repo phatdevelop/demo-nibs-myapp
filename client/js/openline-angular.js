@@ -174,7 +174,8 @@ angular.module('openline', [])
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               xhr.setRequestHeader('Access-Control-Request-Method', 'POST');
               xhr.setRequestHeader('Access-Control-Request-Headers', 'Content-Type');
-              var params = 'grant_type=authorization_code&client_id=' + channelId + '&client_secret=' + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
+              //var params = 'grant_type=authorization_code&client_id=' + channelId + '&client_secret=' + channelSecret + '&code=' + authorizationCode + '&redirect_uri=' + callbackURL;
+              var params = 'grant_type=client_credentials&client_id=1524762961&client_secret=59887b50400fcd8bd40359b9045ce39b';
               xhr.send(params);
         }
 
