@@ -154,7 +154,8 @@ angular.module('openline', [])
                 dataType: 'jsonp',
                 crossDomain: true,
                 headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                    //"Content-Type": "application/x-www-form-urlencoded"
+                    "Content-Type": "text/html"
                 },
                 data: {
                     grant_type: 'authorization_code',
