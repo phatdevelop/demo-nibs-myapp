@@ -152,7 +152,7 @@ angular.module('openline', [])
             return $.ajax({
                 url: getTokenURL,
                 type: "POST",
-                dataType: 'jsonp',
+                dataType: 'json',
                 crossDomain: true,
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded"
