@@ -14,7 +14,7 @@ angular.module('nibs.config', [])
 
     .constant('LINE_GET_USER_URL', 'https://api.line.me/v2/profile')
 
-    .constant('CALLBACK_URL', 'https://testlineup.herokuapp.com/oauthcallback.html')    
+    .constant('CALLBACK_URL', 'https://test-line-app.herokuapp.com/oauthcallback.html')    
 
     .constant('STATUS_LABELS', [
         'Forastero',
