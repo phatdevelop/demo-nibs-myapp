@@ -52,8 +52,8 @@ angular.module('openline', [])
             deferredLogin = $q.defer();
 
             loginSucceeded = false;
-            loginWindow = $window.open(loginURL + '?client_id=' + channelId + '&redirect_uri=' + callbackURL + '&state=123abc' +
-                '&response_type=code&display=popup', '_blank', 'location=no');
+            //loginWindow = $window.open(loginURL + '?client_id=' + channelId + '&redirect_uri=' + callbackURL + '&state=123abc' +
+            //    '&response_type=code&display=popup', '_blank', 'location=no');
 
             // If the app is running in Cordova, listen to URL changes in the InAppBrowser until we get a URL with an access_token or an error
             //if (runningInCordova) {
