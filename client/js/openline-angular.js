@@ -134,43 +134,42 @@ angular.module('openline', [])
         // }
 
         function getAccessToken() {
-            // return $http({
-            //     method: 'POST',
-            //     url: getTokenURL,
-            //     headers: {
-            //         "Content-Type": "application/x-www-form-urlencoded"
-            //     },
-            //     params: {
-            //         grant_type: 'authorization_code',
-            //         client_id: channelId,
-            //         client_secret: channelSecret,
-            //         code: authorizationCode,
-            //         redirect_uri: callbackURL
-            //     }
-            // });
-
-            return $.ajax({
-                type: "POST",
-                dataType: 'jsonp',
-                crossDomain: true,
+            return $http({
+                method: 'POST',
+                url: getTokenURL,
                 headers: {
-                    //"Content-Type": "application/x-www-form-urlencoded"
-                    "Content-Type": "text/html"
+                    "Content-Type": "application/x-www-form-urlencoded"
                 },
-                data: {
+                params: {
                     grant_type: 'authorization_code',
                     client_id: channelId,
                     client_secret: channelSecret,
                     code: authorizationCode,
                     redirect_uri: callbackURL
-                },
-                success: function(data) {
-                    alert("success: " + data);
-                  },
-                  error: function(err) {
-                    console.log(JSON.stringify(err));
-                  }
+                }
             });
+
+            // return $.ajax({
+            //     type: "POST",
+            //     dataType: 'jsonp',
+            //     crossDomain: true,
+            //     headers: {
+            //         "Content-Type": "application/x-www-form-urlencoded"
+            //     },
+            //     data: {
+            //         grant_type: 'authorization_code',
+            //         client_id: channelId,
+            //         client_secret: channelSecret,
+            //         code: authorizationCode,
+            //         redirect_uri: callbackURL
+            //     },
+            //     success: function(data) {
+            //         alert("success: " + data);
+            //       },
+            //       error: function(err) {
+            //         console.log(JSON.stringify(err));
+            //       }
+            // });
 
             // var url = 'https://api.line.me/v2/oauth/accessToken';
 
