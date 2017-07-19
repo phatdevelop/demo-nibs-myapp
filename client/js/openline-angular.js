@@ -163,11 +163,11 @@ angular.module('openline', [])
                     code: authorizationCode,
                     redirect_uri: callbackURL
                 },
-                success: function(response) {
-                    alert("success");
+                success: function(data) {
+                    alert("success: " + data);
                   },
-                  error: function(response) {
-                    console.log(JSON.stringify(response));
+                  error: function(err) {
+                    console.log(JSON.stringify(err));
                   }
             });
 
